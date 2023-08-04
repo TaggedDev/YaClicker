@@ -1,5 +1,3 @@
-using System;
-using TMPro;
 using UI;
 using UnityEngine;
 
@@ -10,11 +8,7 @@ namespace Economy
     /// </summary>
     public class CoinFarmer : MonoBehaviour
     {
-        [SerializeField] private int maxBuildingTier;
-
         [SerializeField] private HUDCanvas hudCanvas;
-        // [sf] private shop shop;
-
         private double _pointsBalance = 0;
         private double _pointsPerClick = 1;
         private double _pointsPerSecond = 1;
@@ -42,8 +36,9 @@ namespace Economy
         private void OnMouseDown()
         {
             HandleObjectClick();
-            //hudCanvas.UpdateBalance(_pointsBalance);
-            print(_pointsBalance);
+            if (!hudCanvas.enabled)
+                return;
+            hudCanvas.UpdateBalance(_pointsBalance);
         }
 
         /// <summary>

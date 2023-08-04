@@ -512,7 +512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e14f46fb0a532a4cb37c80c818c9bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBuildingTier: 0
   hudCanvas: {fileID: 427776536}
 --- !u!65 &1405568606
 BoxCollider:
@@ -832,27 +831,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1627883644922749099, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1627883644922749099, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1627883644922749099, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 1627883644922749099, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1627883644922749099, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 540
       objectReference: {fileID: 0}
     - target: {fileID: 1627883644922749099, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 2784315102206807787, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -885,6 +884,10 @@ PrefabInstance:
     - target: {fileID: 7337512421061950217, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337512421061950217, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7687689672631666041, guid: 92d03ef7ac274cb4a9b10b53073a084b, type: 3}
       propertyPath: balanceText

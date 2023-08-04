@@ -13,9 +13,9 @@ namespace UI
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.Shop);
         }
 
-        /*public void UpdateBalance(double newBalance)
+        public void UpdateBalance(double newBalance)
         {
             balanceText.text = newBalance.ToString();
-        }*/
+        }
     }
 }
