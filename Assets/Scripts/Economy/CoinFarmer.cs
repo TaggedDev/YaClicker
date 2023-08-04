@@ -1,3 +1,4 @@
+using System;
 using UI;
 using UnityEngine;
 
@@ -9,6 +10,22 @@ namespace Economy
     public class CoinFarmer : MonoBehaviour
     {
         [SerializeField] private HUDCanvas hudCanvas;
+
+        public event EventHandler<double> OnPointsSpent = delegate { };
+
+        public double PointsBalance
+        {
+            get => _pointsBalance;
+            set
+            {
+                if (value < 0)
+                    return;
+                
+                _pointsBalance = value;
+                OnPointsSpent(null, _pointsBalance);
+            }
+        }
+
         private double _pointsBalance = 0;
         private double _pointsPerClick = 1;
         private double _pointsPerSecond = 1;

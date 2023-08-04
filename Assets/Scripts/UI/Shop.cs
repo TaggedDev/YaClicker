@@ -12,6 +12,12 @@ namespace UI
         [SerializeField] private Cell shopCellPrefab;
         [SerializeField] private GridLayoutGroup gridParent;
         public override CanvasLayer CanvasLayer => CanvasLayer.Shop;
+        private CoinFarmer _farmer;
+
+        public void AttachFarmerToShop(CoinFarmer farmer)
+        {
+            _farmer = farmer;
+        }
         
         public void CloseShop()
         {
@@ -24,7 +30,7 @@ namespace UI
             foreach (var message in items)
             {
                 var cell = Instantiate(shopCellPrefab, gridParent.transform, true);
-                cell.AttachUpgradeToCell(message);
+                cell.AttachUpgradeToCell(message, _farmer);
             }
         }
     }
