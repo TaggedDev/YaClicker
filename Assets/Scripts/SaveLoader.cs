@@ -1,12 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
 public class SaveLoader : MonoBehaviour
 {
-    [SerializeField] private MyCanvas[] canvases;
+    [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private Shop shop;
+    [Tooltip("First canvas must be player HUD")] [SerializeField] private List<MyCanvas> canvases;
 
     private void Start()
+    {
+        HandleShopLoading();
+        HandleCanvasLoading();
+    }
+
+    private void HandleShopLoading()
+    {
+        var shopEntity = Instantiate(shop, mainCanvas.transform);
+        canvases.Add(shopEntity);
+        shopEntity.gameObject.SetActive(false);
+        shopEntity.LoadUpgrades();
+    }
+
+    private void HandleCanvasLoading()
     {
         CanvasLayersController.Canvases.AddRange(canvases);
         CanvasLayersController.OpenedCanvas = canvases[0];

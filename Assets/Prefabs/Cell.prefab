@@ -783,6 +783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3734258794346887784}
   - component: {fileID: 6966951631439876797}
+  - component: {fileID: 3923424815626996281}
   m_Layer: 5
   m_Name: Cell
   m_TagString: Untagged
@@ -839,3 +840,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &3923424815626996281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8751813642569424670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf7f5d0a60b46c9ac0f42485b28216b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  descriptionText: {fileID: 3548472894267281787}
+  levelText: {fileID: 7793273880132980650}
+  image: {fileID: 1634034189229148507}
+  purchaseButton: {fileID: 54487518456849118}
