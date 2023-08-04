@@ -11,7 +11,7 @@ namespace Economy
     {
         [SerializeField] private HUDCanvas hudCanvas;
 
-        public event EventHandler<double> OnPointsSpent = delegate { };
+        public static event EventHandler<double> OnPointsChanged = delegate { };
 
         public double PointsBalance
         {
@@ -22,7 +22,9 @@ namespace Economy
                     return;
                 
                 _pointsBalance = value;
-                OnPointsSpent(null, _pointsBalance);
+                OnPointsChanged(null, _pointsBalance);
+                if (hudCanvas.enabled)
+                    hudCanvas.UpdateBalance(_pointsBalance);
             }
         }
 
@@ -47,20 +49,17 @@ namespace Economy
         /// </summary>
         private void HandlePassiveIncome()
         {
-            _pointsBalance += _pointsPerSecond;
+            PointsBalance += _pointsPerSecond;
         }
 
         private void OnMouseDown()
         {
             HandleObjectClick();
-            if (!hudCanvas.enabled)
-                return;
-            hudCanvas.UpdateBalance(_pointsBalance);
         }
 
         /// <summary>
         /// Adds points for one click
         /// </summary>
-        private void HandleObjectClick() => _pointsBalance += _pointsPerClick;
+        private void HandleObjectClick() => PointsBalance += _pointsPerClick;
     }
 }

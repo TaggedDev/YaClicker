@@ -23,13 +23,13 @@ namespace Economy
             levelText.text = message.levelText;
             descriptionText.text = message.descriptionText;
             purchaseButton.onClick.AddListener(HandlePurchase);
-            farmer.OnPointsSpent += UpdateBuyButtonCondition;
+            CoinFarmer.OnPointsChanged += UpdateBuyButtonCondition;
         }
 
         private void UpdateBuyButtonCondition(object sender, double e)
         {
             // If not enough money to buy upgrade -> disable button
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
 

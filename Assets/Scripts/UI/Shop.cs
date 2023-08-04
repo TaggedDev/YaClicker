@@ -14,11 +14,6 @@ namespace UI
         public override CanvasLayer CanvasLayer => CanvasLayer.Shop;
         private CoinFarmer _farmer;
 
-        public void AttachFarmerToShop(CoinFarmer farmer)
-        {
-            _farmer = farmer;
-        }
-        
         public void CloseShop()
         {
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.PlayerHUD);
