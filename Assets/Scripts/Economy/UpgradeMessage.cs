@@ -12,8 +12,8 @@ namespace Economy
     {
         [Header("Economy details")] 
         
-        public double purchaseMultiplier = 0;
-        public double purchaseCost = 1;
+        public double priceMultiplier = 0;
+        public double price = 1;
         public double clickBonus = 0;
         public double autoClickBonus = 0;
         
