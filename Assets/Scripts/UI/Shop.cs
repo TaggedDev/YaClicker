@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Economy;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -7,18 +9,23 @@ namespace UI
     /// </summary>
     public class Shop : MyCanvas
     {
-        [SerializeField] private CoinFarmer farmer;
+        [SerializeField] private Cell shopCellPrefab;
+        [SerializeField] private GridLayoutGroup gridParent;
         public override CanvasLayer CanvasLayer => CanvasLayer.Shop;
-
-        public void HandlePurchase(UpgradeMessage message)
-        {
-            farmer.PointsPerClick += message.ClickBonus;
-            farmer.PointsPerSecond += message.AutoClickBonus;
-        }
-
+        
         public void CloseShop()
         {
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.PlayerHUD);
+        }
+
+        public void LoadUpgrades()
+        {
+            var items = Resources.LoadAll<UpgradeMessage>("Upgrades");
+            foreach (var message in items)
+            {
+                var cell = Instantiate(shopCellPrefab, gridParent.transform, true);
+                cell.AttachUpgradeToCell(message);
+            }
         }
     }
 }
