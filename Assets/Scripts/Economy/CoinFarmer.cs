@@ -13,6 +13,9 @@ namespace Economy
 
         public static event EventHandler<double> OnPointsChanged = delegate { };
 
+
+        public double PointsPerClick { get; set; } = 1;
+        public double PointsPerSecond { get; set; } = 1;
         public double PointsBalance
         {
             get => _pointsBalance;
@@ -27,11 +30,8 @@ namespace Economy
                     hudCanvas.UpdateBalance(_pointsBalance);
             }
         }
-
         private double _pointsBalance = 0;
-        private double _pointsPerClick = 1;
-        private double _pointsPerSecond = 1;
-        
+
         private float _passiveIncomeCooldown = 1;
 
         private void Update()
@@ -49,7 +49,7 @@ namespace Economy
         /// </summary>
         private void HandlePassiveIncome()
         {
-            PointsBalance += _pointsPerSecond;
+            PointsBalance += PointsPerSecond;
         }
 
         private void OnMouseDown()
@@ -60,6 +60,6 @@ namespace Economy
         /// <summary>
         /// Adds points for one click
         /// </summary>
-        private void HandleObjectClick() => PointsBalance += _pointsPerClick;
+        private void HandleObjectClick() => PointsBalance += PointsPerClick;
     }
 }

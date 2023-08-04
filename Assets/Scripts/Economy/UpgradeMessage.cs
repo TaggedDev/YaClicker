@@ -16,6 +16,8 @@ namespace Economy
         public double price = 1;
         public double clickBonus = 0;
         public double autoClickBonus = 0;
+
+        [HideInInspector] public uint upgradeLevel;
         
         [Header("Visual details")]
         

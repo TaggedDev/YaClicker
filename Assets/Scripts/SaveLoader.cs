@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Economy;
 using UI;
 using UnityEngine;
 
 public class SaveLoader : MonoBehaviour
 {
     [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private CoinFarmer coinFarmer;
     [SerializeField] private Shop shop;
     [Tooltip("First canvas must be player HUD")] [SerializeField] private List<ClickerCanvas> canvases;
 
@@ -20,6 +22,7 @@ public class SaveLoader : MonoBehaviour
         var shopEntity = Instantiate(shop, mainCanvas.transform);
         canvases.Add(shopEntity);
         shopEntity.gameObject.SetActive(false);
+        shopEntity.Farmer = coinFarmer;
         shopEntity.LoadUpgrades();
     }
 

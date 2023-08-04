@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1975802300}
+  coinFarmer: {fileID: 1405568605}
   shop: {fileID: 2614092505704139673, guid: 5c0bb6815e1c61a44a96be3ff4e00c8d, type: 3}
   canvases:
   - {fileID: 427776536}
