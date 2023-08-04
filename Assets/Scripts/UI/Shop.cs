@@ -7,7 +7,7 @@ namespace UI
     /// <summary>
     /// Object that is used for purchasing upgrades
     /// </summary>
-    public class Shop : MyCanvas
+    public class Shop : ClickerCanvas
     {
         [SerializeField] private Cell shopCellPrefab;
         [SerializeField] private GridLayoutGroup gridParent;

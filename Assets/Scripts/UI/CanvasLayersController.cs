@@ -16,8 +16,8 @@ namespace UI
 
     public static class CanvasLayersController
     {
-        public static List<MyCanvas> Canvases { get; } = new();
-        public static MyCanvas OpenedCanvas { get; set; }
+        public static List<ClickerCanvas> Canvases { get; } = new();
+        public static ClickerCanvas OpenedCanvas { get; set; }
 
         public static void EnableCanvasOfLayer(CanvasLayer affectedLayer)
         {

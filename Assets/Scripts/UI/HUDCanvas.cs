@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class HUDCanvas : MyCanvas
+    public class HUDCanvas : ClickerCanvas
     {
         public override CanvasLayer CanvasLayer => CanvasLayer.PlayerHUD;
         [SerializeField] private TextMeshProUGUI balanceText;

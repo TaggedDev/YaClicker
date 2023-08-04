@@ -7,7 +7,7 @@ public class SaveLoader : MonoBehaviour
 {
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private Shop shop;
-    [Tooltip("First canvas must be player HUD")] [SerializeField] private List<MyCanvas> canvases;
+    [Tooltip("First canvas must be player HUD")] [SerializeField] private List<ClickerCanvas> canvases;
 
     private void Start()
     {
