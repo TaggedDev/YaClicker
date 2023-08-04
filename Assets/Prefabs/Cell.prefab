@@ -856,3 +856,4 @@ MonoBehaviour:
   levelText: {fileID: 7793273880132980650}
   image: {fileID: 1634034189229148507}
   purchaseButton: {fileID: 54487518456849118}
+  buttonText: {fileID: 2257736580427981842}

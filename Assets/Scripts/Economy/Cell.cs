@@ -1,6 +1,7 @@
-﻿using TMPro;
+﻿using System;
+using System.Globalization;
+using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace Economy
@@ -14,9 +15,10 @@ namespace Economy
         [SerializeField] private TextMeshProUGUI levelText;
         [SerializeField] private Image image;
         [SerializeField] private Button purchaseButton;
+        [SerializeField] private TextMeshProUGUI buttonText;
         private CoinFarmer _farmer;
 
-        public UpgradeMessage UpgradeMessage { get; private set; }
+        private UpgradeMessage UpgradeMessage { get; set; }
 
         public void AttachUpgradeToCell(UpgradeMessage message, CoinFarmer coinFarmer)
         {
@@ -25,20 +27,19 @@ namespace Economy
             levelText.text = message.levelText;
             descriptionText.text = message.descriptionText;
             _farmer = coinFarmer;
-            
+
             // Bind button
-            purchaseButton.onClick.AddListener(HandlePurchase);
+            purchaseButton.onClick.AddListener(HandleUpgradePurchase);
             CoinFarmer.OnPointsChanged += UpdateBuyButtonCondition;
         }
 
         private void UpdateBuyButtonCondition(object sender, double balance)
         {
             // If not enough money to buy upgrade -> disable button
-            if (balance < UpgradeMessage.price)
-                purchaseButton.interactable = false;
+            purchaseButton.interactable = balance >= UpgradeMessage.price;
         }
         
-        private void HandlePurchase()
+        private void HandleUpgradePurchase()
         {
             // Grant benefits
             _farmer.PointsPerSecond += UpgradeMessage.autoClickBonus;
@@ -46,7 +47,11 @@ namespace Economy
             // Subtract points
             _farmer.PointsBalance -= UpgradeMessage.price;
             // Increase price
-            UpgradeMessage.price *= UpgradeMessage.priceMultiplier;
+            UpgradeMessage.price = Math.Round(UpgradeMessage.priceMultiplier * UpgradeMessage.price, 3);
+            // Visual changes
+            buttonText.text = UpgradeMessage.price.ToString();
+            levelText.text = $"LVL {UpgradeMessage.upgradeLevel}";
+            UpgradeMessage.upgradeLevel++;
         }
     }
 }

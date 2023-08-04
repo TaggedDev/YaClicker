@@ -1,6 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace Economy
 {
@@ -17,12 +15,12 @@ namespace Economy
         public double clickBonus = 0;
         public double autoClickBonus = 0;
 
-        [HideInInspector] public uint upgradeLevel;
+        [HideInInspector] public uint upgradeLevel = 1;
         
         [Header("Visual details")]
         
         public Sprite upgradeIcon;
         public string descriptionText = "Default description text";
-        public string levelText = "Level: 0";
+        public string levelText = "LVL: 0";
     }
 }

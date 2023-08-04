@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a54819bb8b4536bf783de91d326bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farmer: {fileID: 0}
   shopCellPrefab: {fileID: 3923424815626996281, guid: 183fcf5e307d80e4e847d7fb6c58aeb3, type: 3}
   gridParent: {fileID: 5886977624949033122}
 --- !u!1 &4775187018849759633
