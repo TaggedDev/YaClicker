@@ -11,6 +11,7 @@ namespace UI
     {
         [SerializeField] private Cell shopCellPrefab;
         [SerializeField] private GridLayoutGroup gridParent;
+
         public CoinFarmer Farmer { get; set; }
         public override CanvasLayer CanvasLayer => CanvasLayer.Shop;
 
@@ -19,7 +20,7 @@ namespace UI
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.PlayerHUD);
         }
 
-        public void LoadUpgrades()
+        private void Start()
         {
             var items = Resources.LoadAll<UpgradeMessage>("Upgrades");
             foreach (var message in items)
