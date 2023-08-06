@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace UI
 {
-    public class HUDCanvas : ClickerCanvas
+    public class MainMenu : ClickerCanvas
     {
-        public override CanvasLayer CanvasLayer => CanvasLayer.PlayerHUD;
+        public override CanvasLayer CanvasLayer => CanvasLayer.MainMenu;
         [SerializeField] private TextMeshProUGUI balanceText;
 
         public void OpenShopCanvas()
@@ -15,7 +15,7 @@ namespace UI
 
         public void UpdateBalance(double newBalance)
         {
-            balanceText.text = newBalance.ToString();
+            balanceText.text = $"{newBalance:N3}";
         }
     }
 }
