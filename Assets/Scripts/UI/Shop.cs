@@ -11,13 +11,13 @@ namespace UI
     {
         [SerializeField] private Cell shopCellPrefab;
         [SerializeField] private GridLayoutGroup gridParent;
-
-        public CoinFarmer Farmer { get; set; }
-        public override CanvasLayer CanvasLayer => CanvasLayer.Shop;
+        [SerializeField] private CoinFarmer farmer;
+        
+        public override CanvasLayer CanvasLayerTag => CanvasLayer.Shop;
 
         public void CloseShop()
         {
-            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.PlayerHUD);
+            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.MainMenu);
         }
 
         private void Start()
@@ -26,7 +26,7 @@ namespace UI
             foreach (var message in items)
             {
                 var cell = Instantiate(shopCellPrefab, gridParent.transform, true);
-                cell.AttachUpgradeToCell(message, Farmer);
+                cell.AttachUpgradeToCell(message, farmer);
             }
         }
     }

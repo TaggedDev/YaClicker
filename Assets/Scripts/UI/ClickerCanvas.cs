@@ -7,6 +7,6 @@ namespace UI
     /// </summary>
     public abstract class ClickerCanvas : MonoBehaviour 
     {
-        public abstract CanvasLayer CanvasLayer { get; }
+        public abstract CanvasLayer CanvasLayerTag { get; }
     }
 }
