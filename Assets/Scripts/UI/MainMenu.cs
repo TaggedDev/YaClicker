@@ -5,7 +5,7 @@ namespace UI
 {
     public class MainMenu : ClickerCanvas
     {
-        public override CanvasLayer CanvasLayer => CanvasLayer.MainMenu;
+        public override CanvasLayer CanvasLayerTag => CanvasLayer.MainMenu;
         [SerializeField] private TextMeshProUGUI balanceText;
 
         public void OpenShopCanvas()
@@ -13,9 +13,9 @@ namespace UI
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.Shop);
         }
 
-        public void UpdateBalance(double newBalance)
+        public void UpdateBalance(double newBalance, double pointsPerClick, double pointsPerAutoClick)
         {
-            balanceText.text = $"{newBalance:N3}";
+            balanceText.text = $"{newBalance:N3} [${pointsPerClick}, ${pointsPerAutoClick}]";
         }
     }
 }
