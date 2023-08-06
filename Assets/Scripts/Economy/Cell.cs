@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,42 +15,64 @@ namespace Economy
         [SerializeField] private Image image;
         [SerializeField] private Button purchaseButton;
         [SerializeField] private TextMeshProUGUI buttonText;
+        
+        private int _upgradeLevel;
+        private UpgradeMessage _upgradeMessage;
         private CoinFarmer _farmer;
-
-        private UpgradeMessage UpgradeMessage { get; set; }
+        private double _price;
 
         public void AttachUpgradeToCell(UpgradeMessage message, CoinFarmer coinFarmer)
         {
-            UpgradeMessage = message;
-            image.sprite = message.upgradeIcon;
-            levelText.text = message.levelText;
-            descriptionText.text = message.descriptionText;
+            _upgradeMessage = message;
+            image.sprite = message.UpgradeIcon;
+            levelText.text = message.LevelText;
+            descriptionText.text = message.DescriptionText;
             _farmer = coinFarmer;
 
             // Bind button
             purchaseButton.onClick.AddListener(HandleUpgradePurchase);
             CoinFarmer.OnPointsChanged += UpdateBuyButtonCondition;
+
+            UpdateUpgradeButton();
         }
 
         private void UpdateBuyButtonCondition(object sender, double balance)
         {
             // If not enough money to buy upgrade -> disable button
-            purchaseButton.interactable = balance >= UpgradeMessage.price;
+            purchaseButton.interactable = balance >= _price;
         }
         
         private void HandleUpgradePurchase()
         {
             // Grant benefits
-            _farmer.PointsPerSecond += UpgradeMessage.autoClickBonus;
-            _farmer.PointsPerClick += UpgradeMessage.clickBonus;
+            _farmer.PointsPerAutoClick += _upgradeMessage.AutoClickBonus;
+            _farmer.PointsPerClick += _upgradeMessage.ClickBonus;
+            
             // Subtract points
-            _farmer.PointsBalance -= UpgradeMessage.price;
-            // Increase price
-            UpgradeMessage.price = Math.Round(UpgradeMessage.priceMultiplier * UpgradeMessage.price, 3);
-            // Visual changes
-            buttonText.text = UpgradeMessage.price.ToString();
-            levelText.text = $"LVL {UpgradeMessage.upgradeLevel}";
-            UpgradeMessage.upgradeLevel++;
+            _farmer.PointsBalance -= _price;
+            
+            // Update price
+            _price = GeneratePrice();
+            UpdateUpgradeButton();
+        }
+
+        /// <summary>
+        /// Generates new price for shop item
+        /// </summary>
+        /// <returns>Rounded shop item's price</returns>
+        private double GeneratePrice()
+        {
+            var decreasingCoefficient = 10.0;
+            return Math.Round(Math.Pow(Math.E, _upgradeMessage.StartPrice + _upgradeMessage.PriceDegreeModificator * (_upgradeLevel - 1) / decreasingCoefficient), 3);
+        }
+
+        private void UpdateUpgradeButton()
+        {
+            // Update text & visual
+            _upgradeLevel++;
+            levelText.text = $"LVL {_upgradeLevel}";
+            _price = GeneratePrice();
+            buttonText.text = _price.ToString();
         }
     }
 }
