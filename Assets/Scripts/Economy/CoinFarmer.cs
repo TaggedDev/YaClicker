@@ -10,7 +10,7 @@ namespace Economy
     /// </summary>
     public class CoinFarmer : MonoBehaviour
     {
-        [FormerlySerializedAs("hudCanvas")] [SerializeField] private MainMenu mainMenu;
+        [SerializeField] private MainMenu mainMenu;
         public static event EventHandler<double> OnPointsChanged = delegate { };
 
         public double PointsPerClick

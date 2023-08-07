@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +14,9 @@ public enum ResourceType
 
 namespace Economy
 {
+    /// <summary>
+    /// Model of resource player can earn
+    /// </summary>
     public class PlayerResource : MonoBehaviour
     {
         [SerializeField] private ResourceType resourceType;
@@ -29,8 +31,11 @@ namespace Economy
         [SerializeField] private Color iconColor;
         [SerializeField] private Color backgroundColor;
         [SerializeField] private bool hasDonateButton;
-
+        
         public ResourceType ResourceType => resourceType;
+        /// <summary>
+        /// Text field of this resource block
+        /// </summary>
         public TextMeshProUGUI ValueText => valueText;
         
         private void OnValidate()
