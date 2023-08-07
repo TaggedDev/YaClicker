@@ -12,6 +12,7 @@ namespace UI
         [SerializeField] private Cell shopCellPrefab;
         [SerializeField] private GridLayoutGroup gridParent;
         [SerializeField] private CoinFarmer farmer;
+        [SerializeField] private PlayerResource[] playerResource;
         
         public override CanvasLayer CanvasLayerTag => CanvasLayer.Shop;
 
