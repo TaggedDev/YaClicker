@@ -1,5 +1,6 @@
 ﻿using Economy;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 namespace UI
@@ -11,8 +12,7 @@ namespace UI
     {
         [SerializeField] private Cell shopCellPrefab;
         [SerializeField] private GridLayoutGroup gridParent;
-        [SerializeField] private CoinFarmer farmer;
-        [SerializeField] private PlayerResource[] playerResource;
+        [SerializeField] private SaveLoader loader;
         
         public override CanvasLayer CanvasLayerTag => CanvasLayer.Shop;
 
@@ -27,8 +27,14 @@ namespace UI
             foreach (var message in items)
             {
                 var cell = Instantiate(shopCellPrefab, gridParent.transform, true);
-                cell.AttachUpgradeToCell(message, farmer);
+                cell.AttachUpgradeToCell(message, loader);
             }
+
+            // Trigger 'not enough money' event on buttons on game loads
+            foreach (var resource in loader.Resources)
+                resource.ResourceBank = 0;
+            
+            gameObject.SetActive(false);
         }
     }
 }

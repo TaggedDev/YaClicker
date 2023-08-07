@@ -1,61 +1,40 @@
 using System;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Economy
 {
+    /// <summary>
+    /// Model of resource drop chance
+    /// </summary>
+    [Serializable]
+    public class DropChance
+    {
+        [Range(0, 1)] [SerializeField] private float chance;
+        [SerializeField] private ResourceType resourceType;
+        
+        /// <summary>
+        /// Resource drop chance [0, 1] 
+        /// </summary>
+        public float Chance => chance;
+        /// <summary>
+        /// Resource type
+        /// </summary>
+        public ResourceType ResourceType => resourceType;
+    }
+
     /// <summary>
     /// Instance of coin source (one of three types)
     /// </summary>
     public class CoinFarmer : MonoBehaviour
     {
-        [SerializeField] private MainMenu mainMenu;
-        public static event EventHandler<double> OnPointsChanged = delegate { };
-
-        public double PointsPerClick
-        {
-            get => _pointsPerClick;
-            set
-            {
-                print(value);
-                _pointsPerClick = value;
-            }
-        }
-        public double PointsPerAutoClick
-        {
-            get => _pointsPerAutoClick;
-            set
-            {
-                print(value);
-                _pointsPerAutoClick = value;
-            }
-        }
-        public double PointsBalance
-        {
-            get => _pointsBalance;
-            set
-            {
-                if (value < 0)
-                    return;
-                
-                _pointsBalance = value;
-                OnPointsChanged(null, _pointsBalance);
-                if (mainMenu.enabled)
-                    mainMenu.UpdateBalance(_pointsBalance, _pointsPerClick, _pointsPerAutoClick);
-            }
-        }
+        private const int ResourcesAmount = 6;
         
-        private double _pointsBalance = 0;
-        private double _pointsPerClick = .5;
-        private double _pointsPerAutoClick = 0;
-        private float _passiveIncomeCooldown = 1;
+        [SerializeField] private SaveLoader saveLoader;
+        [SerializeField] private DropChance[] dropChances;
 
-        private void Start()
-        {
-            // Setting balance to zero to force call UpdateBalance method & trigger update events
-            PointsBalance = 0;
-        }
+        private float _passiveIncomeCooldown = 1;
 
         private void Update()
         {
@@ -70,11 +49,24 @@ namespace Economy
         /// <summary>
         /// Adds passive points to balance
         /// </summary>
-        private void HandlePassiveIncome() => PointsBalance += PointsPerAutoClick;
+        private void HandlePassiveIncome()
+        {
+            ObtainResources();
+        }
 
         /// <summary>
         /// Adds points for one click
         /// </summary>
-        public void HandleObjectClick() => PointsBalance += PointsPerClick;
+        public void HandleObjectClick()
+        {
+            ObtainResources();
+        }
+
+        private void ObtainResources()
+        {
+            for (int i = 0; i < ResourcesAmount; i++)
+                if (dropChances[i].Chance > Random.Range(0, 1))
+                    saveLoader.Resources[i].ResourceBank += saveLoader.Resources[i].ResourcePerClick;
+        }
     }
 }

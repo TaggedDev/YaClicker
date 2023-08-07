@@ -21,18 +21,15 @@ namespace UI
 
         public static void EnableCanvasOfLayer(CanvasLayer affectedLayer)
         {
-
             foreach (var canvas in Canvases)
                 canvas.gameObject.SetActive(false);
             
-            
             foreach (var canvas in Canvases)
             {
-                if (canvas.CanvasLayerTag.HasFlag(affectedLayer))
-                {
-                    canvas.gameObject.SetActive(true);
-                    return;
-                }
+                if (!canvas.CanvasLayerTag.HasFlag(affectedLayer)) continue;
+                
+                canvas.gameObject.SetActive(true);
+                return;
             }
         }
     }

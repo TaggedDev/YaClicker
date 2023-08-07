@@ -1,15 +1,16 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public enum ResourceType
 {
-    Coins,
-    Uranium,
-    Power,
-    Iron,
-    Cobalt, 
-    Gold,
+    Coins = 0,
+    Uranium = 1,
+    Power = 2, 
+    Iron = 3,
+    Cobalt = 4, 
+    Gold = 5
 }
 
 namespace Economy
@@ -32,12 +33,40 @@ namespace Economy
         [SerializeField] private Color backgroundColor;
         [SerializeField] private bool hasDonateButton;
         
-        public ResourceType ResourceType => resourceType;
-        /// <summary>
-        /// Text field of this resource block
-        /// </summary>
-        public TextMeshProUGUI ValueText => valueText;
+        // Economic fields
+        [SerializeField] private double resourcePerClick;
+        [SerializeField] private double resourcePerAutoClick;
+        private double _resourceBank;
+
+        public event EventHandler<double> OnResourceChanged = delegate { };
+
+
+        public double ResourcePerAutoClick
+        {
+            get => resourcePerAutoClick;
+            set => resourcePerAutoClick = value;
+        }
         
+        public double ResourcePerClick
+        {
+            get => resourcePerClick;
+            set => resourcePerClick = value;
+        }
+
+        public double ResourceBank
+        {
+            get => _resourceBank;
+            set
+            {
+                if (value < 0)
+                    throw new ArithmeticException($"Setting value for {resourceType} is below zero");
+
+                _resourceBank = Math.Round(value, 3);
+                OnResourceChanged(null, _resourceBank);
+                valueText.text = _resourceBank.ToString();
+            }
+        }
+
         private void OnValidate()
         {
             backgroundImage.color = backgroundColor;

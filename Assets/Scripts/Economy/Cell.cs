@@ -15,24 +15,28 @@ namespace Economy
         [SerializeField] private Image image;
         [SerializeField] private Button purchaseButton;
         [SerializeField] private TextMeshProUGUI buttonText;
-        
+        [SerializeField] private ResourceType type;
+
+        private int _resourceType;
         private int _upgradeLevel;
         private UpgradeMessage _upgradeMessage;
-        private CoinFarmer _farmer;
+        private SaveLoader _loader;
         private double _price;
 
-        public void AttachUpgradeToCell(UpgradeMessage message, CoinFarmer coinFarmer)
+        public void AttachUpgradeToCell(UpgradeMessage message, SaveLoader loader)
         {
+            _loader = loader;
             _upgradeMessage = message;
             image.sprite = message.UpgradeIcon;
             levelText.text = message.LevelText;
             descriptionText.text = message.DescriptionText;
-            _farmer = coinFarmer;
+            //_farmer = coinFarmer;
+
+            _resourceType = (int)type;
 
             // Bind button
             purchaseButton.onClick.AddListener(HandleUpgradePurchase);
-            CoinFarmer.OnPointsChanged += UpdateBuyButtonCondition;
-
+            loader.Resources[_resourceType].OnResourceChanged += UpdateBuyButtonCondition;
             UpdateUpgradeButton();
         }
 
@@ -45,15 +49,18 @@ namespace Economy
         private void HandleUpgradePurchase()
         {
             // Grant benefits
-            _farmer.PointsPerAutoClick += _upgradeMessage.AutoClickBonus;
-            _farmer.PointsPerClick += _upgradeMessage.ClickBonus;
-            
-            // Subtract points
-            _farmer.PointsBalance -= _price;
+            for (int i = 0; i < _loader.Resources.Length; i++)
+            {
+                _loader.Resources[i].ResourcePerClick += _upgradeMessage.ClickBonus[i];
+                _loader.Resources[i].ResourcePerAutoClick += _upgradeMessage.AutoClickBonus[i];
+            }
             
             // Update price
             _price = GeneratePrice();
             UpdateUpgradeButton();
+
+            // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
+            _loader.Resources[(int)type].ResourceBank -= _price;
         }
 
         /// <summary>
