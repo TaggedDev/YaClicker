@@ -78,7 +78,7 @@ namespace Economy
         private void ObtainResources()
         {
             for (int i = 0; i < ResourcesAmount; i++)
-                if (dropChances[i].Chance > Random.Range(0, 1))
+                if (dropChances[i].Chance > Random.Range(0f, 1f))
                     saveLoader.Resources[i].ResourceBank += saveLoader.Resources[i].ResourcePerClick;
         }
 
