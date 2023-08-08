@@ -29,7 +29,7 @@ namespace Economy
     /// </summary>
     public class CoinFarmer : MonoBehaviour
     {
-        private const int ResourcesAmount = 6;
+        public const int ResourcesAmount = 6;
         
         [SerializeField] private SaveLoader saveLoader;
         [SerializeField] private DropChance[] dropChances;
@@ -41,6 +41,9 @@ namespace Economy
         {
             _button = GetComponent<Button>();
             _image = GetComponent<Image>();
+
+            if (dropChances.Length != ResourcesAmount)
+                throw new ArgumentException("Drop Chances has length other than ResourcesAmount in CoinFarmer");
         }
 
         private void Update()

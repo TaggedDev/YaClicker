@@ -479,17 +479,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4632058871589480885, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
   m_PrefabInstance: {fileID: 5734988672698776440}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1077809958 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3520815078869976893, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
-  m_PrefabInstance: {fileID: 5734988672698776440}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1381697370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -879,7 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acbeadb353944cd4ab856a62eaa005b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balanceText: {fileID: 1077809958}
+  balanceText: {fileID: 0}
 --- !u!224 &1517479273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -958,15 +947,15 @@ MonoBehaviour:
   dropChances:
   - chance: 1
     resourceType: 0
-  - chance: 0.847
+  - chance: 0
     resourceType: 1
-  - chance: 0.951
+  - chance: 0
     resourceType: 2
-  - chance: 0.692
+  - chance: 0.3
     resourceType: 3
-  - chance: 0.534
+  - chance: 0.1
     resourceType: 4
-  - chance: 0.404
+  - chance: 0.01
     resourceType: 5
 --- !u!114 &1544626850
 MonoBehaviour:
@@ -1658,6 +1647,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 798929818345265233, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 863667085457617904, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1693,6 +1686,10 @@ PrefabInstance:
     - target: {fileID: 926743182702496764, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: iconColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 926743182702496764, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
+      propertyPath: hasDonateButton
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 926743182702496764, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: resourcePerClick

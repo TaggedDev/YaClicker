@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: DefaultUpgrade
   m_EditorClassIdentifier: 
   clickBonus:
-  - 0
-  - 2
-  - 0
-  - 0
-  - 0
-  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   autoClickBonus:
   - 0
   - 0

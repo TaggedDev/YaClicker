@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Economy;
 using UI;
 using UnityEngine;
@@ -17,7 +18,11 @@ public class SaveLoader : MonoBehaviour
 
     private void Start()
     {
+        if (resources.Length != CoinFarmer.ResourcesAmount)
+            throw new ArgumentException("Resources are not set in SaveLoader object or their length not equal ResourceAmount");
+        
         HandleCanvasLoading();
+        
     }
 
     private void HandleCanvasLoading()
