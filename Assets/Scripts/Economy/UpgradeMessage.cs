@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Economy
 {
@@ -8,19 +10,31 @@ namespace Economy
     [CreateAssetMenu(fileName = "DefaultUpgrade", menuName = "Upgrade", order = 1)]
     public class UpgradeMessage : ScriptableObject
     {
-        [Header("Economy details")] 
-        
-        public double priceMultiplier = 0;
-        public double price = 1;
-        public double clickBonus = 0;
-        public double autoClickBonus = 0;
+        [Header("Bonus details")]
+        [Tooltip("Coins, Uranium, Power, Iron, Cobalt, Gold")] 
+        [SerializeField] private double[] clickBonus;
+        [Tooltip("Coins, Uranium, Power, Iron, Cobalt, Gold")] 
+        [SerializeField] private double[] autoClickBonus;
 
-        [HideInInspector] public uint upgradeLevel = 1;
-        
+
+        [Header("Economy details")]
+        [SerializeField] private double priceDegreeModificator;
+        [SerializeField] private double startPrice;
+        [SerializeField] private ResourceType upgradePrice;
+
         [Header("Visual details")]
-        
-        public Sprite upgradeIcon;
-        public string descriptionText = "Default description text";
-        public string levelText = "LVL: 0";
+        [SerializeField] private uint upgradeID;
+        [SerializeField] private Sprite upgradeIcon;
+        [SerializeField] private string descriptionText = "Default description text";
+        [SerializeField] private string levelText = "LVL: 0";
+
+        public double StartPrice => startPrice;
+        public double[] ClickBonus => clickBonus;
+        public double[] AutoClickBonus => autoClickBonus;
+        public double PriceDegreeModificator => priceDegreeModificator;
+        public uint UpgradeID => upgradeID;
+        public Sprite UpgradeIcon => upgradeIcon;
+        public string DescriptionText => descriptionText;
+        public string LevelText => levelText;
     }
 }

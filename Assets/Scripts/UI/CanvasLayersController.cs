@@ -1,36 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Economy;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace UI
 {
     [Flags]
     public enum CanvasLayer
     {
-        None,
-        PlayerHUD,
-        Shop,
-        All = PlayerHUD | Shop
+        None = 1 << 0,
+        MainMenu = 1 << 1,
+        Shop = 1 << 2
     }
 
 
     public static class CanvasLayersController
     {
+        public static CoinFarmer Farmer;
         public static List<ClickerCanvas> Canvases { get; } = new();
-        public static ClickerCanvas OpenedCanvas { get; set; }
 
         public static void EnableCanvasOfLayer(CanvasLayer affectedLayer)
         {
-            OpenedCanvas.gameObject.SetActive(false);
+            Farmer.SetActive(affectedLayer == CanvasLayer.MainMenu);
 
-            foreach (var canvas in Canvases.Where(canvas => canvas.CanvasLayer.HasFlag(affectedLayer)))
+            foreach (var canvas in Canvases)
+                canvas.gameObject.SetActive(false);
+            
+            foreach (var canvas in Canvases)
             {
-                OpenedCanvas = canvas;
+                if (!canvas.CanvasLayerTag.HasFlag(affectedLayer)) continue;
+                
                 canvas.gameObject.SetActive(true);
                 return;
             }
-            
-            
         }
     }
 }
