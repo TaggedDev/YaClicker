@@ -55,12 +55,13 @@ namespace Economy
                 _loader.Resources[i].ResourcePerAutoClick += _upgradeMessage.AutoClickBonus[i];
             }
             
+            // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
+            _loader.Resources[(int)type].ResourceBank -= _price;
+            
             // Update price
             _price = GeneratePrice();
             UpdateUpgradeButton();
 
-            // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
-            _loader.Resources[(int)type].ResourceBank -= _price;
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace Economy
         /// <returns>Rounded shop item's price</returns>
         private double GeneratePrice()
         {
-            var decreasingCoefficient = 10.0;
+            const double decreasingCoefficient = 10.0;
             return Math.Round(Math.Pow(Math.E, _upgradeMessage.StartPrice + _upgradeMessage.PriceDegreeModificator * (_upgradeLevel - 1) / decreasingCoefficient), 3);
         }
 

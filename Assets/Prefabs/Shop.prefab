@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopCellPrefab: {fileID: 3923424815626996281, guid: 183fcf5e307d80e4e847d7fb6c58aeb3, type: 3}
   gridParent: {fileID: 5886977624949033122}
-  farmer: {fileID: 0}
+  loader: {fileID: 0}
 --- !u!1 &4775187018849759633
 GameObject:
   m_ObjectHideFlags: 0
