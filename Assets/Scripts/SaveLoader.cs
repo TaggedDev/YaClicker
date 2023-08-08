@@ -10,6 +10,8 @@ public class SaveLoader : MonoBehaviour
     [Tooltip("Coins, Uranium, Power, Iron, Cobalt, Gold")] [SerializeField]
     private PlayerResource[] resources;
 
+    [SerializeField] private CoinFarmer farmer;
+
     public PlayerResource[] Resources => resources;
 
 
@@ -20,6 +22,7 @@ public class SaveLoader : MonoBehaviour
 
     private void HandleCanvasLoading()
     {
+        CanvasLayersController.Farmer = farmer;
         CanvasLayersController.Canvases.AddRange(canvases);
     }
 }

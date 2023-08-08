@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Economy;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,10 +18,13 @@ namespace UI
 
     public static class CanvasLayersController
     {
+        public static CoinFarmer Farmer;
         public static List<ClickerCanvas> Canvases { get; } = new();
 
         public static void EnableCanvasOfLayer(CanvasLayer affectedLayer)
         {
+            Farmer.SetActive(affectedLayer == CanvasLayer.MainMenu);
+
             foreach (var canvas in Canvases)
                 canvas.gameObject.SetActive(false);
             

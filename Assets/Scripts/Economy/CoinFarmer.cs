@@ -1,6 +1,6 @@
 using System;
-using UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Economy
@@ -33,8 +33,15 @@ namespace Economy
         
         [SerializeField] private SaveLoader saveLoader;
         [SerializeField] private DropChance[] dropChances;
-
+        private Button _button;
+        private Image _image;
         private float _passiveIncomeCooldown = 1;
+
+        private void Start()
+        {
+            _button = GetComponent<Button>();
+            _image = GetComponent<Image>();
+        }
 
         private void Update()
         {
@@ -62,11 +69,20 @@ namespace Economy
             ObtainResources();
         }
 
+        /// <summary>
+        /// Handles resources drop and add
+        /// </summary>
         private void ObtainResources()
         {
             for (int i = 0; i < ResourcesAmount; i++)
                 if (dropChances[i].Chance > Random.Range(0, 1))
                     saveLoader.Resources[i].ResourceBank += saveLoader.Resources[i].ResourcePerClick;
+        }
+
+        public void SetActive(bool isActive)
+        {
+            _button.interactable = isActive;
+            _image.enabled = isActive;
         }
     }
 }
