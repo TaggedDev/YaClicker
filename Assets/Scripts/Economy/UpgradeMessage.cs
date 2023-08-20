@@ -16,7 +16,6 @@ namespace Economy
         [Tooltip("Coins, Uranium, Power, Iron, Cobalt, Gold")] 
         [SerializeField] private double[] autoClickBonus;
 
-
         [Header("Economy details")]
         [SerializeField] private double priceDegreeModificator;
         [SerializeField] private double startPrice;

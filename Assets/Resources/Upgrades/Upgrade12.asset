@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 827a08a7574e45f28926ad74fc7d88c8, type: 3}
+  m_Name: Upgrade12
+  m_EditorClassIdentifier: 
+  clickBonus:
+  - 8670000
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  autoClickBonus:
+  - 32100000
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  priceDegreeModificator: 1.55
+  startPrice: 15300000000
+  upgradePrice: 0
+  upgradeID: 0
+  upgradeIcon: {fileID: 0}
+  descriptionText: "\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0435
+    \u0445\u0440\u0430\u043D\u0438\u043B\u0438\u0449\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432"
+  levelText: LVL 0

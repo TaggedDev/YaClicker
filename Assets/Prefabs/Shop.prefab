@@ -33,7 +33,7 @@ RectTransform:
   - {fileID: 8927344235612940220}
   - {fileID: 6811582592333951368}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopCellPrefab: {fileID: 3923424815626996281, guid: 183fcf5e307d80e4e847d7fb6c58aeb3, type: 3}
-  gridParent: {fileID: 0}
+  layoutParent: {fileID: 0}
   loader: {fileID: 0}
 --- !u!1 &4775187018849759633
 GameObject:

@@ -30,8 +30,6 @@ namespace Economy
             image.sprite = message.UpgradeIcon;
             levelText.text = message.LevelText;
             descriptionText.text = message.DescriptionText;
-            //_farmer = coinFarmer;
-
             _resourceType = (int)type;
 
             // Bind button
@@ -70,8 +68,10 @@ namespace Economy
         /// <returns>Rounded shop item's price</returns>
         private double GeneratePrice()
         {
-            const double decreasingCoefficient = 10.0;
-            return Math.Round(Math.Pow(Math.E, _upgradeMessage.StartPrice + _upgradeMessage.PriceDegreeModificator * (_upgradeLevel - 1) / decreasingCoefficient), 3);
+            // Math.Round(Math.Pow(Math.E, _upgradeMessage.StartPrice + _upgradeMessage.PriceDegreeModificator * (_upgradeLevel - 1) / decreasingCoefficient), 3);
+            if (_upgradeLevel == 0)
+                return _upgradeMessage.StartPrice;
+            return Math.Round(_upgradeMessage.StartPrice * Math.Pow(_upgradeMessage.PriceDegreeModificator, _upgradeLevel - 1), 3);
         }
 
         private void UpdateUpgradeButton()
