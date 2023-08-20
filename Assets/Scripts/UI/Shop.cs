@@ -11,7 +11,7 @@ namespace UI
     public class Shop : ClickerCanvas
     {
         [SerializeField] private Cell shopCellPrefab;
-        [SerializeField] private GridLayoutGroup gridParent;
+        [SerializeField] private VerticalLayoutGroup layoutParent;
         [SerializeField] private SaveLoader loader;
         
         public override CanvasLayer CanvasLayerTag => CanvasLayer.Shop;
@@ -26,7 +26,7 @@ namespace UI
             var items = Resources.LoadAll<UpgradeMessage>("Upgrades");
             foreach (var message in items)
             {
-                var cell = Instantiate(shopCellPrefab, gridParent.transform, true);
+                var cell = Instantiate(shopCellPrefab, layoutParent.transform, true);
                 cell.AttachUpgradeToCell(message, loader);
             }
 
