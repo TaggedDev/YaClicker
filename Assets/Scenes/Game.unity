@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 466873979}
   - component: {fileID: 466873980}
   m_Layer: 5
-  m_Name: Frame_Social
+  m_Name: CLICKER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1998,16 +1998,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 9b89c26d9bfdbc94baf343b403299a69, type: 3}
     - target: {fileID: 2942445842214738084, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
-      propertyPath: m_Color.b
+      propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2942445842214738084, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8962264
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942445842214738084, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: m_Color.g
-      value: 0.28532422
+      value: 0.8211166
       objectReference: {fileID: 0}
     - target: {fileID: 2942445842214738084, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: m_Color.r
-      value: 0.0047169924
+      value: 0.7905393
       objectReference: {fileID: 0}
     - target: {fileID: 3551104356847719191, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: m_Color.a
