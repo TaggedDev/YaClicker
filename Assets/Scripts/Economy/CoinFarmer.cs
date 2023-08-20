@@ -53,7 +53,6 @@ namespace Economy
             _image = GetComponent<Image>();
             _animator = GetComponent<Animator>();
             
-            
             if (dropChances.Length != ResourcesAmount)
                 throw new ArgumentException("Drop Chances has length other than ResourcesAmount in CoinFarmer");
         }
