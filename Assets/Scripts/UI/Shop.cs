@@ -1,4 +1,5 @@
-﻿using Economy;
+﻿using System.Linq;
+using Economy;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -23,7 +24,7 @@ namespace UI
 
         private void Start()
         {
-            var items = Resources.LoadAll<UpgradeMessage>("Upgrades");
+            var items = Resources.LoadAll<UpgradeMessage>("Upgrades").OrderBy(x => x.UpgradeID);
             foreach (var message in items)
             {
                 var cell = Instantiate(shopCellPrefab, layoutParent.transform, true);

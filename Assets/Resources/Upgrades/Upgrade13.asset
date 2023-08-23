@@ -29,7 +29,7 @@ MonoBehaviour:
   priceDegreeModificator: 1.58
   startPrice: 68000000000
   upgradePrice: 0
-  upgradeID: 0
+  upgradeID: 13
   upgradeIcon: {fileID: 0}
   descriptionText: "\u041C\u0430\u0441\u043B\u044F\u043D\u043D\u044B\u0439 \u043D\u0430\u0441\u043E\u0441"
   levelText: LVL 0
