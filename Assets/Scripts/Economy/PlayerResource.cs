@@ -63,7 +63,8 @@ namespace Economy
 
                 _resourceBank = Math.Round(value, 3);
                 OnResourceChanged(null, _resourceBank);
-                valueText.text = _resourceBank.ToString();
+                var stringValue = CoinFarmer.TranslateMoney(_resourceBank);
+                valueText.text = stringValue;
             }
         }
 
