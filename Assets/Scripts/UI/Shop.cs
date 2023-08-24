@@ -25,10 +25,12 @@ namespace UI
         private void Start()
         {
             var items = Resources.LoadAll<UpgradeMessage>("Upgrades").OrderBy(x => x.UpgradeID);
+            Cell previousCell = null;
             foreach (var message in items)
             {
                 var cell = Instantiate(shopCellPrefab, layoutParent.transform, true);
-                cell.AttachUpgradeToCell(message, loader);
+                cell.AttachUpgradeToCell(message, loader, previousCell);
+                previousCell = cell;
             }
 
             // Trigger 'not enough money' event on buttons on game loads

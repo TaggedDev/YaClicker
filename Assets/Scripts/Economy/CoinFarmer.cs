@@ -73,7 +73,7 @@ namespace Economy
         /// </summary>
         private void HandlePassiveIncome()
         {
-            ObtainResources(false);
+            ObtainResources(false, true);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Economy
         /// </summary>
         public void HandleObjectClick()
         {
-            ObtainResources(true);
+            ObtainResources(true, false);
             HandleClickAnimation();
         }
 
@@ -103,16 +103,19 @@ namespace Economy
         /// <summary>
         /// Handles resources drop and add
         /// </summary>
-        private void ObtainResources(bool showText)
+        private void ObtainResources(bool showText, bool passiveIncome)
         {
             for (int i = 0; i < ResourcesAmount; i++)
             {
                 if (dropChances[i].Chance > Random.Range(0f, 1f))
                 {
-                    var balance = saveLoader.Resources[i].ResourcePerClick;
-                    saveLoader.Resources[i].ResourceBank += balance;
-                    var stringBalance = TranslateMoney(balance);
-                    if (balance != 0 && showText)
+                    var income = saveLoader.Resources[i].ResourcePerClick;
+                    if (passiveIncome)
+                         income = saveLoader.Resources[i].ResourcePerAutoClick;
+                    
+                    saveLoader.Resources[i].ResourceBank += income;
+                    var stringBalance = TranslateMoney(income);
+                    if (income != 0 && showText)
                         StartCoroutine(SpawnClickText(stringBalance));
                 }
             }
@@ -130,6 +133,7 @@ namespace Economy
         /// <param name="money">Amount of money to format</param>
         /// <returns>Readable version of money</returns>
 
+        
         public static string TranslateMoney(double money)
         {
             // <0 -> 123
@@ -139,29 +143,37 @@ namespace Economy
             // Trillions T = 10^12
             // Quadrillions = Q = 1^15
             // EXTRA = E18+
-
-            string moneyString = money.ToString();
-            Console.Write(moneyString + " ");
+            var moneyString = money.ToString();
             switch (money)
             {
                 case >= 1000000000000000000:
-                    return $"{moneyString[0]}.{moneyString[2]} E{moneyString[^2]}{moneyString[^1]}";
+                    var degree = CountDegree();
 
+                    string CountDegree()
+                    {
+                        var answer = string.Empty;
+                        for (int i = moneyString.IndexOf('+'); i < moneyString.Length; i++)
+                            answer += moneyString[i];
+                
+                        return answer;
+                    }
+
+                    return $"{moneyString[0]}.{moneyString[2]}E{degree}";
                 case >= 1000000000000000:
-                    return $"{moneyString[0]}{moneyString[1]}{moneyString[2]}.{moneyString[3]}Q";
+                    return $"{Math.Floor(money / 1000000000000000 * 10) / 10}Q";
                 case >= 1000000000000:
-                    return $"{moneyString[0]}{moneyString[1]}{moneyString[2]}.{moneyString[3]}T";
+                    return $"{Math.Floor(money / 1000000000000 * 10) / 10}T";
                 case >= 1000000000:
-                    return $"{moneyString[0]}{moneyString[1]}{moneyString[2]}.{moneyString[3]}B";
+                    return $"{Math.Floor(money / 1000000000 * 10) / 10}B";
                 case >= 1000000:
-                    return $"{moneyString[0]}{moneyString[1]}{moneyString[2]}.{moneyString[3]}M";
+                    return $"{Math.Floor(money / 1000000 * 10) / 10}M";
                 case >= 1000:
-                    return $"{moneyString[0]}{moneyString[1]}{moneyString[2]}.{moneyString[3]}K";
+                    return $"{Math.Floor(money / 1000 * 10) / 10}K";
                 default:
                 {
                     var decimalPart = (money - (int)money).ToString();
                     char decimalFirstChar = decimalPart.Length > 2 ? decimalPart[2] : '0';
-                    
+
 
                     return money switch
                     {
@@ -173,5 +185,6 @@ namespace Economy
                 }
             }
         }
+
     }
 }

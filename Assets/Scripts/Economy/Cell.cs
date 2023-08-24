@@ -17,13 +17,18 @@ namespace Economy
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private ResourceType type;
 
+        public int UpgradeLevel => _upgradeLevel;
+        public uint UpgradeID => _upgradeMessage.UpgradeID;
+
+        private Cell _previousCell;
         private int _resourceType;
         private int _upgradeLevel;
         private UpgradeMessage _upgradeMessage;
         private SaveLoader _loader;
         private double _price;
+        
 
-        public void AttachUpgradeToCell(UpgradeMessage message, SaveLoader loader)
+        public void AttachUpgradeToCell(UpgradeMessage message, SaveLoader loader, Cell previousUpgradeCell)
         {
             _loader = loader;
             _upgradeMessage = message;
@@ -31,6 +36,7 @@ namespace Economy
             levelText.text = message.LevelText;
             descriptionText.text = message.DescriptionText;
             _resourceType = (int)type;
+            _previousCell = previousUpgradeCell;
 
             // Bind button
             purchaseButton.onClick.AddListener(HandleUpgradePurchase);
@@ -41,7 +47,19 @@ namespace Economy
         private void UpdateBuyButtonCondition(object sender, double balance)
         {
             // If not enough money to buy upgrade -> disable button
-            purchaseButton.interactable = balance >= _price;
+            var isAffordable = balance >= _price;
+            purchaseButton.interactable = isAffordable;
+            
+            if (_previousCell is null)
+                return;
+
+            var isPreviousUpgradeBought = _previousCell.UpgradeLevel > 1;
+            
+            // Check affordability 
+            // Enable cell if: previous item was already bought or this item is affordable 
+            var isPurchaseAvailable = isPreviousUpgradeBought || isAffordable;
+
+            gameObject.SetActive(isPurchaseAvailable);
         }
         
         private void HandleUpgradePurchase()
@@ -52,14 +70,15 @@ namespace Economy
                 _loader.Resources[i].ResourcePerClick += _upgradeMessage.ClickBonus[i];
                 _loader.Resources[i].ResourcePerAutoClick += _upgradeMessage.AutoClickBonus[i];
             }
-            
-            // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
-            _loader.Resources[(int)type].ResourceBank -= _price;
-            
+
+            var oldPrice = _price;
+
             // Update price
             _price = GeneratePrice();
             UpdateUpgradeButton();
-
+            
+            // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
+            _loader.Resources[(int)type].ResourceBank -= oldPrice;
         }
 
         /// <summary>
