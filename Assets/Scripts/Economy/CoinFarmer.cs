@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using TMPro;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -36,7 +36,9 @@ namespace Economy
         [SerializeField] private SaveLoader saveLoader;
         [SerializeField] private DropChance[] dropChances;
         [SerializeField] private RectTransform textParent;
-        [SerializeField] private RectTransform textPrefab;
+        [SerializeField] private ClickText textPrefab;
+        [SerializeField] private Color[] resourceColors;
+        [SerializeField] private Sprite[] resourceSprites;
 
         private float _halfWidth, _halfHeight;
         private Animator _animator;
@@ -47,8 +49,9 @@ namespace Economy
 
         private void Start()
         {
-            _halfHeight = textParent.rect.height / 2;
-            _halfWidth = textParent.rect.width / 2;
+            var rect = textParent.rect;
+            _halfHeight = rect.height / 2;
+            _halfWidth = rect.width / 2;
 
             _button = GetComponent<Button>();
             _image = GetComponent<Image>();
@@ -85,14 +88,20 @@ namespace Economy
             HandleClickAnimation();
         }
 
-        private IEnumerator SpawnClickText(string number)
+        private IEnumerator SpawnClickText(string number, int resourceIndex)
         {
             var position = new Vector2(Random.Range(-_halfWidth, _halfWidth), Random.Range(-_halfHeight, _halfHeight));
-            var text = Instantiate(textPrefab, Vector3.zero, Quaternion.identity, textParent.transform);
-            text.anchoredPosition = position;
-            text.GetComponentInChildren<TextMeshProUGUI>().text = number;
+            var textInstance = Instantiate(textPrefab, Vector3.zero, Quaternion.identity, textParent.transform);
+            
+            // Set up resource setting for click text
+            textInstance.RectTransform.anchoredPosition = position;
+            textInstance.Text.text = number;
+            textInstance.Text.color = resourceColors[resourceIndex];
+            textInstance.Image.sprite = resourceSprites[resourceIndex];
+            
+            // Let the animation process and destroy object
             yield return new WaitForSeconds(1f);
-            Destroy(text.gameObject);
+            Destroy(textInstance.gameObject);
         }
 
         private void HandleClickAnimation()
@@ -116,7 +125,7 @@ namespace Economy
                     saveLoader.Resources[i].ResourceBank += income;
                     var stringBalance = TranslateMoney(income);
                     if (income != 0 && showText)
-                        StartCoroutine(SpawnClickText(stringBalance));
+                        StartCoroutine(SpawnClickText(stringBalance, i));
                 }
             }
         }
@@ -143,7 +152,7 @@ namespace Economy
             // Trillions T = 10^12
             // Quadrillions = Q = 1^15
             // EXTRA = E18+
-            var moneyString = money.ToString();
+            var moneyString = money.ToString(CultureInfo.InvariantCulture);
             switch (money)
             {
                 case >= 1000000000000000000:
@@ -171,7 +180,7 @@ namespace Economy
                     return $"{Math.Floor(money / 1000 * 10) / 10}K";
                 default:
                 {
-                    var decimalPart = (money - (int)money).ToString();
+                    var decimalPart = (money - (int)money).ToString(CultureInfo.InvariantCulture);
                     char decimalFirstChar = decimalPart.Length > 2 ? decimalPart[2] : '0';
 
 
