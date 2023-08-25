@@ -3,19 +3,26 @@ using UnityEngine;
 
 namespace UI
 {
-    public class MainMenu : ClickerCanvas
+    public interface IPressableButton
     {
+        public void HandleButtonPress();
+        public void HandleButtonRelease();
+    }
+    
+    public class MainMenu : ClickerCanvas, IPressableButton
+    {
+        [Tooltip("Shop button text"),SerializeField] private TextMeshProUGUI buttonText;
         public override CanvasLayer CanvasLayerTag => CanvasLayer.MainMenu;
-        [SerializeField] private TextMeshProUGUI balanceText;
-
-        public void OpenShopCanvas()
+        
+        public void HandleButtonPress()
         {
-            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.Shop);
+            buttonText.rectTransform.anchoredPosition -= new Vector2(0, 20);
         }
 
-        public void UpdateBalance(double newBalance, double pointsPerClick, double pointsPerAutoClick)
+        public void HandleButtonRelease()
         {
-            balanceText.text = $"{newBalance:N3} [${pointsPerClick}, ${pointsPerAutoClick}]";
+            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.Shop);
+            buttonText.rectTransform.anchoredPosition += new Vector2(0, 20);
         }
     }
 }

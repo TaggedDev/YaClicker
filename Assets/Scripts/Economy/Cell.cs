@@ -1,6 +1,8 @@
 ﻿using System;
 using TMPro;
+using UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Economy
@@ -8,12 +10,13 @@ namespace Economy
     /// <summary>
     /// Model of cell in shop
     /// </summary>
-    public class Cell : MonoBehaviour
+    public class Cell : MonoBehaviour, IPressableButton
     {
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI levelText;
         [SerializeField] private Image image;
         [SerializeField] private Button purchaseButton;
+        [SerializeField] private EventTrigger buttonTrigger;
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private ResourceType type;
 
@@ -39,9 +42,27 @@ namespace Economy
             _previousCell = previousUpgradeCell;
 
             // Bind button
-            purchaseButton.onClick.AddListener(HandleUpgradePurchase);
+            BindButtonTriggers();
             loader.Resources[_resourceType].OnResourceChanged += UpdateBuyButtonCondition;
             UpdateUpgradeButton();
+
+            void BindButtonTriggers()
+            {
+                var pointerDown = new EventTrigger.Entry
+                {
+                    eventID = EventTriggerType.PointerDown
+                };
+                pointerDown.callback.AddListener(_ => HandleButtonPress());
+                
+                var pointerUp = new EventTrigger.Entry
+                {
+                    eventID = EventTriggerType.PointerUp
+                };
+                pointerUp.callback.AddListener(_ => HandleButtonRelease());
+                
+                buttonTrigger.triggers.Add(pointerDown);
+                buttonTrigger.triggers.Add(pointerUp);
+            }
         }
 
         private void UpdateBuyButtonCondition(object sender, double balance)
@@ -62,6 +83,9 @@ namespace Economy
             gameObject.SetActive(isPurchaseAvailable);
         }
         
+        /// <summary>
+        /// Handles upgrade button click
+        /// </summary>
         private void HandleUpgradePurchase()
         {
             // Grant benefits
@@ -100,6 +124,23 @@ namespace Economy
             levelText.text = $"LVL {_upgradeLevel}";
             _price = GeneratePrice();
             buttonText.text = _price.ToString();
+        }
+
+        public void HandleButtonPress()
+        {
+            if (!purchaseButton.interactable)
+                return;
+            
+            buttonText.rectTransform.anchoredPosition -= new Vector2(0, 20);
+        }
+
+        public void HandleButtonRelease()
+        {
+            if (!purchaseButton.interactable)
+                return;
+            
+            buttonText.rectTransform.anchoredPosition += new Vector2(0, 20);
+            HandleUpgradePurchase();
         }
     }
 }

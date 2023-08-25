@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Economy;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -9,19 +10,15 @@ namespace UI
     /// <summary>
     /// Object that is used for purchasing upgrades
     /// </summary>
-    public class Shop : ClickerCanvas
+    public class Shop : ClickerCanvas, IPressableButton
     {
         [SerializeField] private Cell shopCellPrefab;
         [SerializeField] private VerticalLayoutGroup layoutParent;
         [SerializeField] private SaveLoader loader;
+        [SerializeField] private TextMeshProUGUI buttonText;
         
         public override CanvasLayer CanvasLayerTag => CanvasLayer.Shop;
-
-        public void CloseShop()
-        {
-            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.MainMenu);
-        }
-
+        
         private void Start()
         {
             var items = Resources.LoadAll<UpgradeMessage>("Upgrades").OrderBy(x => x.UpgradeID);
@@ -38,6 +35,17 @@ namespace UI
                 resource.ResourceBank = 0;
             
             gameObject.SetActive(false);
+        }
+
+        public void HandleButtonPress()
+        {
+            buttonText.rectTransform.anchoredPosition -= new Vector2(0, 20);
+        }
+
+        public void HandleButtonRelease()
+        {
+            buttonText.rectTransform.anchoredPosition += new Vector2(0, 20);
+            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.MainMenu);
         }
     }
 }
