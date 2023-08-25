@@ -388,6 +388,7 @@ MonoBehaviour:
   shopCellPrefab: {fileID: 3923424815626996281, guid: 183fcf5e307d80e4e847d7fb6c58aeb3, type: 3}
   layoutParent: {fileID: 9131046642954667615}
   loader: {fileID: 0}
+  buttonText: {fileID: 8580103813602678486}
 --- !u!1 &4491652654932652963
 GameObject:
   m_ObjectHideFlags: 0
