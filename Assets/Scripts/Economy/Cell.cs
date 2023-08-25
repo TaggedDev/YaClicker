@@ -123,7 +123,7 @@ namespace Economy
             _upgradeLevel++;
             levelText.text = $"LVL {_upgradeLevel}";
             _price = GeneratePrice();
-            buttonText.text = _price.ToString();
+            buttonText.text = CoinFarmer.TranslateMoney(_price);
         }
 
         public void HandleButtonPress()
@@ -136,10 +136,9 @@ namespace Economy
 
         public void HandleButtonRelease()
         {
+            buttonText.rectTransform.anchoredPosition = new Vector2(0, 0);
             if (!purchaseButton.interactable)
                 return;
-            
-            buttonText.rectTransform.anchoredPosition += new Vector2(0, 20);
             HandleUpgradePurchase();
         }
     }
