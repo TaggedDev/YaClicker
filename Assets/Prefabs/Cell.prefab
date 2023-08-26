@@ -1164,3 +1164,5 @@ MonoBehaviour:
   buttonTrigger: {fileID: 5239845660094009833}
   buttonText: {fileID: 2257736580427981842}
   type: 0
+  donateCanvas: {fileID: 0}
+  rectTransform: {fileID: 3734258794346887784}

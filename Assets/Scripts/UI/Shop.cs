@@ -26,6 +26,7 @@ namespace UI
             foreach (var message in items)
             {
                 var cell = Instantiate(shopCellPrefab, layoutParent.transform, true);
+                cell.RectTransform.localScale = Vector3.one;
                 cell.AttachUpgradeToCell(message, loader, previousCell);
                 previousCell = cell;
             }

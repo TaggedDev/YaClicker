@@ -20,9 +20,12 @@ namespace Economy
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private ResourceType type;
         [SerializeField] private Canvas donateCanvas;
+        [SerializeField] private RectTransform rectTransform;
 
         public int UpgradeLevel => _upgradeLevel;
         public uint UpgradeID => _upgradeMessage.UpgradeID;
+        public RectTransform RectTransform => rectTransform;
+
 
         private Cell _previousCell;
         private int _resourceType;
