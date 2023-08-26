@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,9 +35,13 @@ namespace Economy
         [SerializeField] private bool hasDonateButton;
         
         // Economic fields
+        [Header("Economics")]
         [SerializeField] private double resourcePerClick;
         [SerializeField] private double resourcePerAutoClick;
         private double _resourceBank;
+        
+        [Header("Donate canvas")]
+        [SerializeField] private ClickerCanvas donateCanvas;
 
         public event EventHandler<double> OnResourceChanged = delegate { };
 
@@ -77,7 +82,7 @@ namespace Economy
         
         public void HandleDonateButton()
         {
-            
+            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.UraniumDonate);
         }
     }
 }

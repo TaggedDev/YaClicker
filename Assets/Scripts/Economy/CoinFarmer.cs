@@ -40,18 +40,35 @@ namespace Economy
         [SerializeField] private Color[] resourceColors;
         [SerializeField] private Sprite[] resourceSprites;
 
+        [Header("Sunrays")] 
+        [SerializeField] private Image boostFillBar; 
+        [SerializeField] private Color boostLongColor;
+        [SerializeField] private Color boostShortColor;
+        [SerializeField] private Image longRays;
+        [SerializeField] private Image shortRays;
+        private Color _defaultShortColor;
+        private Color _defaultLongColor;
+
         private float _halfWidth, _halfHeight;
         private Animator _animator;
         private Button _button;
         private Image _image;
         private float _passiveIncomeCooldown = 1;
         private float _targetFarmSize;
+        private float _currentIncomeMultiplier = 1;
+        private IEnumerator _currentScalingCoroutine;
+        private IEnumerator _currentBoostCountingCoroutine;
+        private static readonly int IsBoosted = Animator.StringToHash("IsBoosted");
+        
 
         private void Start()
         {
             var rect = textParent.rect;
             _halfHeight = rect.height / 2;
             _halfWidth = rect.width / 2;
+
+            _defaultLongColor = longRays.color;
+            _defaultShortColor = shortRays.color;
 
             _button = GetComponent<Button>();
             _image = GetComponent<Image>();
@@ -121,7 +138,8 @@ namespace Economy
                     var income = saveLoader.Resources[i].ResourcePerClick;
                     if (passiveIncome)
                          income = saveLoader.Resources[i].ResourcePerAutoClick;
-                    
+
+                    income *= _currentIncomeMultiplier;
                     saveLoader.Resources[i].ResourceBank += income;
                     var stringBalance = TranslateMoney(income);
                     if (income != 0 && showText)
@@ -141,8 +159,6 @@ namespace Economy
         /// </summary>
         /// <param name="money">Amount of money to format</param>
         /// <returns>Readable version of money</returns>
-
-        
         public static string TranslateMoney(double money)
         {
             // <0 -> 123
@@ -194,6 +210,49 @@ namespace Economy
                 }
             }
         }
+        
+        /// <summary>
+        /// Handles duration of boost. Will be restarted on repeated call 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public void HandleIncomeBoost(float multiplier, float secondsDuration)
+        {
+            if (_currentScalingCoroutine is not null)
+            {
+                StopCoroutine(_currentScalingCoroutine);
+                StopCoroutine(_currentBoostCountingCoroutine);
+            }
+                
+            
+            _currentScalingCoroutine = StartTimer();
+            StartCoroutine(_currentScalingCoroutine);
+            
+            IEnumerator StartTimer()
+            {
+                _currentBoostCountingCoroutine = EnableVisualBar();
+                StartCoroutine(_currentBoostCountingCoroutine);
 
+                IEnumerator EnableVisualBar()
+                {
+                    var animationTime = secondsDuration;
+                    while (animationTime > 0)
+                    {
+                        animationTime -= Time.deltaTime;
+                        boostFillBar.fillAmount = animationTime / secondsDuration;
+                        yield return null;
+                    }
+                }
+
+
+                _currentIncomeMultiplier = multiplier;
+                longRays.color = boostLongColor;
+                shortRays.color = boostShortColor;
+                yield return new WaitForSeconds(secondsDuration);
+                longRays.color = _defaultLongColor;
+                shortRays.color = _defaultShortColor;
+                _currentIncomeMultiplier = 1;
+            }
+        }
     }
 }

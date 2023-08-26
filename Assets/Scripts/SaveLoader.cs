@@ -13,6 +13,9 @@ public class SaveLoader : MonoBehaviour
 
     [SerializeField] private CoinFarmer farmer;
 
+    /// <summary>
+    /// Coin, uranium, power, iron, cobalt, gold
+    /// </summary>
     public PlayerResource[] Resources => resources;
 
 
@@ -29,5 +32,15 @@ public class SaveLoader : MonoBehaviour
     {
         CanvasLayersController.Farmer = farmer;
         CanvasLayersController.Canvases.AddRange(canvases);
+    }
+
+    /// <summary>
+    /// Applies boost on CoinFarmer with given params
+    /// </summary>
+    /// <param name="multiplier">Boost coefficient</param>
+    /// <param name="secondsDuration">Boost duration</param>
+    public void ApplyBoost(float multiplier, float secondsDuration)
+    {
+        farmer.HandleIncomeBoost(multiplier, secondsDuration);
     }
 }

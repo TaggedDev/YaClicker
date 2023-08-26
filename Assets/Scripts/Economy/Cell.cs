@@ -21,7 +21,7 @@ namespace Economy
         [SerializeField] private ResourceType type;
         [SerializeField] private Canvas donateCanvas;
         [SerializeField] private RectTransform rectTransform;
-
+        
         public int UpgradeLevel => _upgradeLevel;
         public uint UpgradeID => _upgradeMessage.UpgradeID;
         public RectTransform RectTransform => rectTransform;
