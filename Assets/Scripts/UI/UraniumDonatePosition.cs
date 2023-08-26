@@ -9,23 +9,14 @@ namespace UI
     public class UraniumDonatePosition : ScriptableObject
     {
         [SerializeField] private double reward = 0;
-        [SerializeField] private float boostTime = 0;
-        [SerializeField] private float boostMultiplier = 1;
-
-        /// <summary>
-        /// Duration (s) of boost 
-        /// </summary>
-        public float BoostTime => boostTime;
-        
-        /// <summary>
-        /// Boost income coefficient
-        /// </summary>
-        public float BoostMultiplier => boostMultiplier;
+        [SerializeField] private string descriptionText;
         
         /// <summary>
         /// Reward for watching add (uranium)
         /// </summary>
         public double Reward => reward;
+
+        public string DescriptionText => descriptionText;
     }
     
 }
