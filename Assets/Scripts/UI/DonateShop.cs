@@ -24,5 +24,10 @@ namespace UI
             buttonText.rectTransform.anchoredPosition += new Vector2(0, 20);
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.MainMenu);
         }
+
+        public void UraniumShopOpen()
+        {
+            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.UraniumShop);
+        }
     }
 }

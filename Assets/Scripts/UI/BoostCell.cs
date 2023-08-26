@@ -10,7 +10,8 @@ namespace UI
         [SerializeField] private UraniumBoostPosition boost;
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private TextMeshProUGUI descriptionText;
-
+        [SerializeField] private AdReminderWindow popUp;
+        
         private void Start()
         {
             buttonText.text = boost.Price.ToString();
@@ -23,6 +24,8 @@ namespace UI
             if (balance < boost.Price)
             {
                 // Offer visit shop
+                popUp.gameObject.SetActive(true);
+                popUp.Animator.SetTrigger("Pop");
                 return;
             }
             saveLoader.Resources[1].ResourceBank -= boost.Price;
