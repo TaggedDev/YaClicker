@@ -12,7 +12,9 @@ namespace UI
     {
         None = 1 << 0,
         MainMenu = 1 << 1,
-        Shop = 1 << 2
+        Shop = 1 << 2,
+        UraniumDonate = 1 << 3,
+        UraniumShop = 1 << 4
     }
 
 

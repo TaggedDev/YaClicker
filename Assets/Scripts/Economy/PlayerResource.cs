@@ -74,5 +74,10 @@ namespace Economy
             iconImage.color = iconColor;
             donateButton.gameObject.SetActive(hasDonateButton);
         }
+        
+        public void HandleDonateButton()
+        {
+            
+        }
     }
 }

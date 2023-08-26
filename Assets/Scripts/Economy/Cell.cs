@@ -19,6 +19,7 @@ namespace Economy
         [SerializeField] private EventTrigger buttonTrigger;
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private ResourceType type;
+        [SerializeField] private Canvas donateCanvas;
 
         public int UpgradeLevel => _upgradeLevel;
         public uint UpgradeID => _upgradeMessage.UpgradeID;
@@ -139,6 +140,7 @@ namespace Economy
             buttonText.rectTransform.anchoredPosition = new Vector2(0, 0);
             if (!purchaseButton.interactable)
                 return;
+            
             HandleUpgradePurchase();
         }
     }
