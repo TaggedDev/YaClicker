@@ -536,7 +536,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eca17570eb9bf324dba332c520568e1b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84cb29c51a47f014587f13f621c965a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -576,9 +576,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: 5db87f9b98d5e6340820be4c5cf6c5c4, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 8f6d7ce7c179bd242856d9f3cf87c548, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: b3f2f3bd97ae3b64e9d40ffb3d0a5eee, type: 3}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -722,6 +722,7 @@ MonoBehaviour:
   boost: {fileID: 11400000, guid: aa0598d6acb151e4fa0c9f995ce2cacf, type: 2}
   buttonText: {fileID: 1826154956307588104}
   descriptionText: {fileID: 4338085587971696380}
+  popUp: {fileID: 0}
 --- !u!1 &5846034480733725814
 GameObject:
   m_ObjectHideFlags: 0
