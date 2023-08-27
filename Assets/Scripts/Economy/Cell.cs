@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -19,14 +21,12 @@ namespace Economy
         [SerializeField] private EventTrigger buttonTrigger;
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private ResourceType type;
-        [SerializeField] private Canvas donateCanvas;
         [SerializeField] private RectTransform rectTransform;
         
         public int UpgradeLevel => _upgradeLevel;
-        public uint UpgradeID => _upgradeMessage.UpgradeID;
         public RectTransform RectTransform => rectTransform;
 
-
+        private string[] _phrases = new[] { "Монет", "Урана", "Мощи", "Железа", "Кобальта", "Золота" };
         private Cell _previousCell;
         private int _resourceType;
         private int _upgradeLevel;
@@ -41,7 +41,7 @@ namespace Economy
             _upgradeMessage = message;
             image.sprite = message.UpgradeIcon;
             levelText.text = message.LevelText;
-            descriptionText.text = message.DescriptionText;
+            descriptionText.text = GenerateDescriptionText();
             _resourceType = (int)type;
             _previousCell = previousUpgradeCell;
 
@@ -66,6 +66,38 @@ namespace Economy
                 
                 buttonTrigger.triggers.Add(pointerDown);
                 buttonTrigger.triggers.Add(pointerUp);
+            }
+
+            string GenerateDescriptionText()
+            {
+                StringBuilder sb = new StringBuilder(message.DescriptionText);
+                
+                sb.Append("\n<color=#ffa500ff><size=24>");
+                sb.Append($"+{DoubleArrayToString(message.ClickBonus)} за клик\n");
+                sb.Append($"+{DoubleArrayToString(message.AutoClickBonus)} за автоклик\n");
+                sb.Append("</size><b><size=30>");
+
+                string DoubleArrayToString(double[] array)
+                {
+                    if (array.Length == 0)
+                        return string.Empty;
+
+                    var arraySb = new StringBuilder();
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        if (array[i] == 0.0)
+                            continue;
+                        
+                        arraySb.Append(CoinFarmer.TranslateMoney(array[i]));
+                        arraySb.Append(" ");
+                        arraySb.Append(_phrases[i]);
+                        arraySb.Append("/");
+                    }
+
+                    return arraySb.ToString();
+                }
+                
+                return sb.ToString();
             }
         }
 
@@ -128,6 +160,30 @@ namespace Economy
             levelText.text = $"LVL {_upgradeLevel}";
             _price = GeneratePrice();
             buttonText.text = CoinFarmer.TranslateMoney(_price);
+            buttonText.text += "\n" + "<size=20>" + GetCurrency() + "</size>";
+
+            string GetCurrency()
+            {
+                switch (_upgradeMessage.UpgradePrice)
+                {
+                    case ResourceType.Coins:
+                        return "[МОНЕТЫ]";
+                    case ResourceType.Uranium:
+                    case ResourceType.Power:
+                        break;
+                    case ResourceType.Iron:
+                        return "[ЖЕЛЕЗО]";
+                    case ResourceType.Cobalt:
+                        return "[КОБАЛЬТ]";
+                    case ResourceType.Gold:
+                        return "[ЗОЛОТО]";
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                return string.Empty;
+            }
+            
         }
 
         public void HandleButtonPress()

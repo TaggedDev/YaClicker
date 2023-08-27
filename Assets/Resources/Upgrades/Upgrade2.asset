@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: Upgrade2
   m_EditorClassIdentifier: 
   clickBonus:
+  - 0
+  - 0
+  - 0
   - 2
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 0
+  - 0
   autoClickBonus:
+  - 0
+  - 0
+  - 0
   - 40
-  - 0
-  - 0
-  - 0
   - 0
   - 0
   priceDegreeModificator: 1.1
   startPrice: 300
-  upgradePrice: 0
+  upgradePrice: 3
   upgradeID: 2
   upgradeIcon: {fileID: 0}
   descriptionText: "\u042D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C

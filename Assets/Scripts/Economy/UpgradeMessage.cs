@@ -35,5 +35,6 @@ namespace Economy
         public Sprite UpgradeIcon => upgradeIcon;
         public string DescriptionText => descriptionText;
         public string LevelText => levelText;
+        public ResourceType UpgradePrice => upgradePrice;
     }
 }

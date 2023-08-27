@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: Upgrade14
   m_EditorClassIdentifier: 
   clickBonus:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 53200000
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
   autoClickBonus:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 700000000
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
   priceDegreeModificator: 1.75
   startPrice: 375000000000
-  upgradePrice: 0
+  upgradePrice: 5
   upgradeID: 14
   upgradeIcon: {fileID: 0}
   descriptionText: "\u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 \u043F\u0440\u0438\u0432\u043E\u0434\u043E\u0432"

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickBonus:
   - 1000000
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   autoClickBonus:
   - 2100000
   - 0

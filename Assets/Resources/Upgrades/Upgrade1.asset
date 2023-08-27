@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickBonus:
   - 0.4
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 0.4
+  - 0.4
+  - 0.4
+  - 0.4
+  - 0.4
   autoClickBonus:
   - 0.5
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
   priceDegreeModificator: 1.07
   startPrice: 10
   upgradePrice: 0
