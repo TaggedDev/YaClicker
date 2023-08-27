@@ -1,10 +1,9 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace UI
 {
-    public class AdReminderWindow : MonoBehaviour
+    public class AdReminderWindow : MonoBehaviour, IPressableButton
     {
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private Animator animator;
@@ -15,11 +14,17 @@ namespace UI
         {
             CloseReminder();
         }
-
-        public void MoveToDonateCanvas()
+        
+        public void HandleButtonPress()
         {
-            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.UraniumDonate);
+            buttonText.rectTransform.anchoredPosition -= new Vector2(0, 6);
+        }
+
+        public void HandleButtonRelease()
+        {
+            buttonText.rectTransform.anchoredPosition += new Vector2(0, 6);
             CloseReminder();
+            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.UraniumDonate);
         }
 
         public void CloseReminder()
