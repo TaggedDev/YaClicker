@@ -20,7 +20,7 @@ namespace UI
 
         public void HandleBoostPurchase()
         {
-            var balance = saveLoader.Resources[1].ResourceBank;
+            var balance = saveLoader.UraniumAmount.ResourceBank;
             if (balance < boost.Price)
             {
                 // Offer visit shop
@@ -28,7 +28,7 @@ namespace UI
                 popUp.Animator.SetTrigger("Pop");
                 return;
             }
-            saveLoader.Resources[1].ResourceBank -= boost.Price;
+            saveLoader.UraniumAmount.ResourceBank -= boost.Price;
             saveLoader.ApplyBoost(boost.BoostMultiplier, boost.BoostTime);
         }
 

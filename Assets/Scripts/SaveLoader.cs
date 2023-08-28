@@ -8,21 +8,25 @@ public class SaveLoader : MonoBehaviour
 {
     [Tooltip("First canvas must be player HUD")] [SerializeField]
     private List<ClickerCanvas> canvases;
-    [Tooltip("Coins, Uranium, Power, Iron, Cobalt, Gold")] [SerializeField]
-    private PlayerResource[] resources;
-
+    [SerializeField] private PlayerResource coinAmount;
+    [SerializeField] private PlayerResource uraniumAmount;
     [SerializeField] private CoinFarmer farmer;
 
     /// <summary>
-    /// Coin, uranium, power, iron, cobalt, gold
+    /// Coins balance
     /// </summary>
-    public PlayerResource[] Resources => resources;
+    public PlayerResource CoinAmount => coinAmount;
+    
+    /// <summary>
+    /// Uranium balance
+    /// </summary>
+    public PlayerResource UraniumAmount => uraniumAmount;
 
 
     private void Start()
     {
-        if (resources.Length != CoinFarmer.ResourcesAmount)
-            throw new ArgumentException("Resources are not set in SaveLoader object or their length not equal ResourceAmount");
+        if (coinAmount is null || uraniumAmount is null)
+            throw new ArgumentException("Resources are not set in SaveLoader");
         
         HandleCanvasLoading();
         

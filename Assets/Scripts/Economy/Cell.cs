@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using TMPro;
 using UI;
@@ -20,16 +19,14 @@ namespace Economy
         [SerializeField] private Button purchaseButton;
         [SerializeField] private EventTrigger buttonTrigger;
         [SerializeField] private TextMeshProUGUI buttonText;
-        [SerializeField] private ResourceType type;
         [SerializeField] private RectTransform rectTransform;
-        
-        public int UpgradeLevel => _upgradeLevel;
+
+        private int UpgradeLevel { get; set; }
+
         public RectTransform RectTransform => rectTransform;
 
-        private string[] _phrases = new[] { "Монет", "Урана", "Мощи", "Железа", "Кобальта", "Золота" };
         private Cell _previousCell;
         private int _resourceType;
-        private int _upgradeLevel;
         private UpgradeMessage _upgradeMessage;
         private SaveLoader _loader;
         private double _price;
@@ -42,12 +39,11 @@ namespace Economy
             image.sprite = message.UpgradeIcon;
             levelText.text = message.LevelText;
             descriptionText.text = GenerateDescriptionText();
-            _resourceType = (int)type;
             _previousCell = previousUpgradeCell;
 
             // Bind button
             BindButtonTriggers();
-            loader.Resources[_resourceType].OnResourceChanged += UpdateBuyButtonCondition;
+            loader.CoinAmount.OnResourceChanged += UpdateBuyButtonCondition;
             UpdateUpgradeButton();
 
             void BindButtonTriggers()
@@ -73,30 +69,10 @@ namespace Economy
                 StringBuilder sb = new StringBuilder(message.DescriptionText);
                 
                 sb.Append("\n<color=#ffa500ff><size=24>");
-                sb.Append($"+{DoubleArrayToString(message.ClickBonus)} за клик\n");
-                sb.Append($"+{DoubleArrayToString(message.AutoClickBonus)} за автоклик\n");
+                sb.Append($"+{CoinFarmer.TranslateMoney(message.ClickBonus)} за клик\n");
+                sb.Append($"+{CoinFarmer.TranslateMoney(message.AutoClickBonus)} за автоклик\n");
                 sb.Append("</size><b><size=30>");
 
-                string DoubleArrayToString(double[] array)
-                {
-                    if (array.Length == 0)
-                        return string.Empty;
-
-                    var arraySb = new StringBuilder();
-                    for (int i = 0; i < array.Length; i++)
-                    {
-                        if (array[i] == 0.0)
-                            continue;
-                        
-                        arraySb.Append(CoinFarmer.TranslateMoney(array[i]));
-                        arraySb.Append(" ");
-                        arraySb.Append(_phrases[i]);
-                        arraySb.Append("/");
-                    }
-
-                    return arraySb.ToString();
-                }
-                
                 return sb.ToString();
             }
         }
@@ -125,11 +101,9 @@ namespace Economy
         private void HandleUpgradePurchase()
         {
             // Grant benefits
-            for (int i = 0; i < _loader.Resources.Length; i++)
-            {
-                _loader.Resources[i].ResourcePerClick += _upgradeMessage.ClickBonus[i];
-                _loader.Resources[i].ResourcePerAutoClick += _upgradeMessage.AutoClickBonus[i];
-            }
+            _loader.CoinAmount.ResourcePerClick += _upgradeMessage.ClickBonus;
+            _loader.CoinAmount.ResourcePerAutoClick += _upgradeMessage.AutoClickBonus;
+            
 
             var oldPrice = _price;
 
@@ -138,7 +112,7 @@ namespace Economy
             UpdateUpgradeButton();
             
             // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
-            _loader.Resources[(int)type].ResourceBank -= oldPrice;
+            _loader.CoinAmount.ResourceBank -= oldPrice;
         }
 
         /// <summary>
@@ -148,42 +122,18 @@ namespace Economy
         private double GeneratePrice()
         {
             // Math.Round(Math.Pow(Math.E, _upgradeMessage.StartPrice + _upgradeMessage.PriceDegreeModificator * (_upgradeLevel - 1) / decreasingCoefficient), 3);
-            if (_upgradeLevel == 0)
+            if (UpgradeLevel == 0)
                 return _upgradeMessage.StartPrice;
-            return Math.Round(_upgradeMessage.StartPrice * Math.Pow(_upgradeMessage.PriceDegreeModificator, _upgradeLevel - 1), 3);
+            return Math.Round(_upgradeMessage.StartPrice * Math.Pow(_upgradeMessage.PriceDegreeModificator, UpgradeLevel - 1), 3);
         }
 
         private void UpdateUpgradeButton()
         {
             // Update text & visual
-            _upgradeLevel++;
-            levelText.text = $"LVL {_upgradeLevel}";
+            UpgradeLevel++;
+            levelText.text = $"LVL {UpgradeLevel}";
             _price = GeneratePrice();
             buttonText.text = CoinFarmer.TranslateMoney(_price);
-            buttonText.text += "\n" + "<size=20>" + GetCurrency() + "</size>";
-
-            string GetCurrency()
-            {
-                switch (_upgradeMessage.UpgradePrice)
-                {
-                    case ResourceType.Coins:
-                        return "[МОНЕТЫ]";
-                    case ResourceType.Uranium:
-                    case ResourceType.Power:
-                        break;
-                    case ResourceType.Iron:
-                        return "[ЖЕЛЕЗО]";
-                    case ResourceType.Cobalt:
-                        return "[КОБАЛЬТ]";
-                    case ResourceType.Gold:
-                        return "[ЗОЛОТО]";
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-                return string.Empty;
-            }
-            
         }
 
         public void HandleButtonPress()

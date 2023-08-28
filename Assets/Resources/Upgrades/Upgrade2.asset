@@ -12,23 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827a08a7574e45f28926ad74fc7d88c8, type: 3}
   m_Name: Upgrade2
   m_EditorClassIdentifier: 
-  clickBonus:
-  - 0
-  - 0
-  - 0
-  - 2
-  - 0
-  - 0
-  autoClickBonus:
-  - 0
-  - 0
-  - 0
-  - 40
-  - 0
-  - 0
+  clickBonus: 40
+  autoClickBonus: 2
   priceDegreeModificator: 1.1
   startPrice: 300
-  upgradePrice: 3
   upgradeID: 2
   upgradeIcon: {fileID: 0}
   descriptionText: "\u042D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C

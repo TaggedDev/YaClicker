@@ -20,7 +20,7 @@ namespace UI
             // TODO:
             // Watch AD -> Yandex API integration
             // Wait -> add money
-            saveLoader.Resources[1].ResourceBank += donate.Reward;
+            saveLoader.UraniumAmount.ResourceBank += donate.Reward;
         }
     }
 }

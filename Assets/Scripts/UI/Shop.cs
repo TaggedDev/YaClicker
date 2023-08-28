@@ -2,7 +2,6 @@
 using Economy;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
 namespace UI
@@ -32,9 +31,9 @@ namespace UI
             }
 
             // Trigger 'not enough money' event on buttons on game loads
-            foreach (var resource in loader.Resources)
-                resource.ResourceBank = 0;
-            
+            loader.CoinAmount.ResourceBank = 0;
+            loader.UraniumAmount.ResourceBank = 0;
+
             gameObject.SetActive(false);
         }
 

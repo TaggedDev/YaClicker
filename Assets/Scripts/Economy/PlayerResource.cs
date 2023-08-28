@@ -4,16 +4,6 @@ using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ResourceType
-{
-    Coins = 0,
-    Uranium = 1,
-    Power = 2, 
-    Iron = 3,
-    Cobalt = 4, 
-    Gold = 5
-}
-
 namespace Economy
 {
     /// <summary>
@@ -21,8 +11,6 @@ namespace Economy
     /// </summary>
     public class PlayerResource : MonoBehaviour
     {
-        [SerializeField] private ResourceType resourceType;
-        
         [Header("Resource components cache")]
         [SerializeField] private Image backgroundImage;
         [SerializeField] private Image iconImage;
@@ -39,9 +27,6 @@ namespace Economy
         [SerializeField] private double resourcePerClick;
         [SerializeField] private double resourcePerAutoClick;
         private double _resourceBank;
-        
-        [Header("Donate canvas")]
-        [SerializeField] private ClickerCanvas donateCanvas;
 
         public event EventHandler<double> OnResourceChanged = delegate { };
 
@@ -64,7 +49,7 @@ namespace Economy
             set
             {
                 if (value < 0)
-                    throw new ArithmeticException($"Setting value for {resourceType} is below zero");
+                    throw new ArithmeticException($"Setting value is below zero");
 
                 _resourceBank = Math.Round(value, 3);
                 OnResourceChanged(null, _resourceBank);

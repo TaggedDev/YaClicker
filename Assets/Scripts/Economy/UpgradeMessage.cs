@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 namespace Economy
 {
@@ -11,15 +9,12 @@ namespace Economy
     public class UpgradeMessage : ScriptableObject
     {
         [Header("Bonus details")]
-        [Tooltip("Coins, Uranium, Power, Iron, Cobalt, Gold")] 
-        [SerializeField] private double[] clickBonus;
-        [Tooltip("Coins, Uranium, Power, Iron, Cobalt, Gold")] 
-        [SerializeField] private double[] autoClickBonus;
+        [SerializeField] private double clickBonus;
+        [SerializeField] private double autoClickBonus;
 
         [Header("Economy details")]
         [SerializeField] private double priceDegreeModificator;
         [SerializeField] private double startPrice;
-        [SerializeField] private ResourceType upgradePrice;
 
         [Header("Visual details")]
         [SerializeField] private uint upgradeID;
@@ -28,13 +23,12 @@ namespace Economy
         [SerializeField] private string levelText = "LVL: 0";
 
         public double StartPrice => startPrice;
-        public double[] ClickBonus => clickBonus;
-        public double[] AutoClickBonus => autoClickBonus;
+        public double ClickBonus => clickBonus;
+        public double AutoClickBonus => autoClickBonus;
         public double PriceDegreeModificator => priceDegreeModificator;
         public uint UpgradeID => upgradeID;
         public Sprite UpgradeIcon => upgradeIcon;
         public string DescriptionText => descriptionText;
         public string LevelText => levelText;
-        public ResourceType UpgradePrice => upgradePrice;
     }
 }

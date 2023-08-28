@@ -8,33 +8,11 @@ using Random = UnityEngine.Random;
 namespace Economy
 {
     /// <summary>
-    /// Model of resource drop chance
-    /// </summary>
-    [Serializable]
-    public class DropChance
-    {
-        [Range(0, 1), SerializeField] private float chance;
-        [SerializeField] private ResourceType resourceType;
-        
-        /// <summary>
-        /// Resource drop chance [0, 1] 
-        /// </summary>
-        public float Chance => chance;
-        /// <summary>
-        /// Resource type
-        /// </summary>
-        public ResourceType ResourceType => resourceType;
-    }
-
-    /// <summary>
     /// Instance of coin source (one of three types)
     /// </summary>
     public class CoinFarmer : MonoBehaviour
     {
-        public const int ResourcesAmount = 6;
-
         [SerializeField] private SaveLoader saveLoader;
-        [SerializeField] private DropChance[] dropChances;
         [SerializeField] private RectTransform textParent;
         [SerializeField] private ClickText textPrefab;
         [SerializeField] private Color[] resourceColors;
@@ -58,8 +36,7 @@ namespace Economy
         private float _currentIncomeMultiplier = 1;
         private IEnumerator _currentScalingCoroutine;
         private IEnumerator _currentBoostCountingCoroutine;
-        private static readonly int IsBoosted = Animator.StringToHash("IsBoosted");
-        
+
 
         private void Start()
         {
@@ -73,9 +50,6 @@ namespace Economy
             _button = GetComponent<Button>();
             _image = GetComponent<Image>();
             _animator = GetComponent<Animator>();
-
-            if (dropChances.Length != ResourcesAmount)
-                throw new ArgumentException("Drop Chances has length other than ResourcesAmount in CoinFarmer");
         }
 
         private void Update()
@@ -105,7 +79,7 @@ namespace Economy
             HandleClickAnimation();
         }
 
-        private IEnumerator SpawnClickText(string number, int resourceIndex)
+        private IEnumerator SpawnClickText(string number)
         {
             var position = new Vector2(Random.Range(-_halfWidth, _halfWidth), Random.Range(-_halfHeight, _halfHeight));
             var textInstance = Instantiate(textPrefab, Vector3.zero, Quaternion.identity, textParent.transform);
@@ -113,8 +87,8 @@ namespace Economy
             // Set up resource setting for click text
             textInstance.RectTransform.anchoredPosition = position;
             textInstance.Text.text = number;
-            textInstance.Text.color = resourceColors[resourceIndex];
-            textInstance.Image.sprite = resourceSprites[resourceIndex];
+            textInstance.Text.color = resourceColors[0];
+            textInstance.Image.sprite = resourceSprites[0];
             
             // Let the animation process and destroy object
             yield return new WaitForSeconds(1f);
@@ -131,21 +105,15 @@ namespace Economy
         /// </summary>
         private void ObtainResources(bool showText, bool passiveIncome)
         {
-            for (int i = 0; i < ResourcesAmount; i++)
-            {
-                if (dropChances[i].Chance > Random.Range(0f, 1f))
-                {
-                    var income = saveLoader.Resources[i].ResourcePerClick;
-                    if (passiveIncome)
-                         income = saveLoader.Resources[i].ResourcePerAutoClick;
+            var income = saveLoader.CoinAmount.ResourcePerClick;
+            if (passiveIncome)
+                income = saveLoader.CoinAmount.ResourcePerAutoClick;
 
-                    income *= _currentIncomeMultiplier;
-                    saveLoader.Resources[i].ResourceBank += income;
-                    var stringBalance = TranslateMoney(income);
-                    if (income != 0 && showText)
-                        StartCoroutine(SpawnClickText(stringBalance, i));
-                }
-            }
+            income *= _currentIncomeMultiplier;
+            saveLoader.CoinAmount.ResourceBank += income;
+            var stringBalance = TranslateMoney(income);
+            if (income != 0 && showText)
+                StartCoroutine(SpawnClickText(stringBalance));
         }
 
         public void SetActive(bool isActive)

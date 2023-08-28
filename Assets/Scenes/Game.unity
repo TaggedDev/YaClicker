@@ -275,17 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3bd3f0828943959cb743ea786f1187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &370212901 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5835016948437191662, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
-  m_PrefabInstance: {fileID: 5734988672698776440}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56341a5be2666b4cb93b1143ae5a72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &393751637 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2755056256314787737, guid: b717c5e26ea97e34e8e3224c92e82439, type: 3}
@@ -664,13 +653,8 @@ MonoBehaviour:
   canvases:
   - {fileID: 1517479272}
   - {fileID: 393751638}
-  resources:
-  - {fileID: 1497894455}
-  - {fileID: 1793536056}
-  - {fileID: 1145276271}
-  - {fileID: 1605885047}
-  - {fileID: 370212901}
-  - {fileID: 1462593853}
+  coinAmount: {fileID: 1497894455}
+  uraniumAmount: {fileID: 1793536056}
   farmer: {fileID: 1135460751}
 --- !u!1 &889815757
 GameObject:
@@ -945,19 +929,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveLoader: {fileID: 854250413}
-  dropChances:
-  - chance: 1
-    resourceType: 0
-  - chance: 0
-    resourceType: 1
-  - chance: 0
-    resourceType: 2
-  - chance: 0.3
-    resourceType: 3
-  - chance: 0.1
-    resourceType: 4
-  - chance: 0.01
-    resourceType: 5
   textParent: {fileID: 544390964}
   textPrefab: {fileID: 8190388068320819258, guid: 90bab870b7d91814694006be453a74e9, type: 3}
   resourceColors:
@@ -1094,17 +1065,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1145276271 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8124206263753730942, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
-  m_PrefabInstance: {fileID: 5734988672698776440}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56341a5be2666b4cb93b1143ae5a72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1255639902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,17 +1179,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1462593853 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1064195787968906600, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
-  m_PrefabInstance: {fileID: 5734988672698776440}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56341a5be2666b4cb93b1143ae5a72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1497894455 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 926743182702496764, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
@@ -1401,17 +1350,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571251617}
   m_CullTransparentMesh: 1
---- !u!114 &1605885047 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6539521443169442486, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
-  m_PrefabInstance: {fileID: 5734988672698776440}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56341a5be2666b4cb93b1143ae5a72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1624850835
 GameObject:
   m_ObjectHideFlags: 0
@@ -4723,15 +4661,15 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 19842b2aa656c404dbf8906419ebd75b, type: 3}
     - target: {fileID: 1198748384622374160, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.0072029675
       objectReference: {fileID: 0}
     - target: {fileID: 1198748384622374160, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.7169812
       objectReference: {fileID: 0}
     - target: {fileID: 1198748384622374160, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1828163756035130866, guid: 6e7565013ca0bde4f8c170a888fc6ea5, type: 3}
       propertyPath: m_ChildAlignment
