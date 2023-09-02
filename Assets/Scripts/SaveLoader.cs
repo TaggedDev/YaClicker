@@ -85,6 +85,10 @@ public class SaveLoader : MonoBehaviour
     {
         coinAmount.ResourceBank = YandexGame.savesData.PlayerResourceValues[0];
         uraniumAmount.ResourceBank = YandexGame.savesData.PlayerResourceValues[1];
+        for (int i = 0; i < shop.Cells.Length; i++)
+            shop.Cells[i].UpgradeLevel = YandexGame.savesData.PlayerUpgradesLevels[i]; 
+        
+        Debug.Log("Loaded information");
     }
 
     private void SaveDataEditorly()

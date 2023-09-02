@@ -2,6 +2,7 @@
 using System.Text;
 using TMPro;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,8 +21,21 @@ namespace Economy
         [SerializeField] private EventTrigger buttonTrigger;
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private RectTransform rectTransform;
-
-        public int UpgradeLevel { get; private set; }
+        private int _upgradeLevel;
+        
+        public int UpgradeLevel
+        {
+            get
+            {
+                return _upgradeLevel;
+            }
+            set
+            {
+                _upgradeLevel = value;
+                UpdateCell();
+            }
+            
+        }
 
         public RectTransform RectTransform => rectTransform;
 
@@ -131,9 +145,15 @@ namespace Economy
         {
             // Update text & visual
             UpgradeLevel++;
+            UpdateCell();
+        }
+
+        private void UpdateCell()
+        {
             levelText.text = $"LVL {UpgradeLevel}";
             _price = GeneratePrice();
             buttonText.text = CoinFarmer.TranslateMoney(_price);
+
         }
 
         public void HandleButtonPress()

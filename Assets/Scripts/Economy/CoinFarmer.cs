@@ -67,6 +67,7 @@ namespace Economy
         /// </summary>
         private void HandlePassiveIncome()
         {
+            saveLoader.SaveData();
             ObtainResources(false, true);
         }
 
