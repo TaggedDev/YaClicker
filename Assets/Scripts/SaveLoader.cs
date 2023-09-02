@@ -15,6 +15,7 @@ public class SaveLoader : MonoBehaviour
     [SerializeField] private Shop shop;
     [SerializeField] private CoinFarmer farmer;
     [SerializeField] private PlayerProfilePicture playerPicture;
+    [SerializeField] private DonateShop donateShop;
     
     /// <summary>
     /// Coins balance
@@ -36,8 +37,18 @@ public class SaveLoader : MonoBehaviour
         farmer.HandleIncomeBoost(multiplier, secondsDuration);
     }
 
-    private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
-    private void OnDisable() => YandexGame.GetDataEvent -= GetLoad;
+    private void OnEnable()
+    {
+        YandexGame.GetDataEvent += GetLoad;
+        YandexGame.RewardVideoEvent += HandleRewardAdWatch;
+
+    }
+
+    private void OnDisable()
+    {
+        YandexGame.GetDataEvent -= GetLoad;
+        YandexGame.RewardVideoEvent -= HandleRewardAdWatch;
+    } 
 
     private void Start()
     {
@@ -58,6 +69,11 @@ public class SaveLoader : MonoBehaviour
         CanvasLayersController.Canvases.AddRange(canvases);
     }
 
+    private void HandleRewardAdWatch(int id)
+    {
+        donateShop.GivePlayerReward(id);
+    }
+    
     public void SaveData()
     {
         YandexGame.savesData.PlayerResourceValues[0] = coinAmount.ResourceBank;

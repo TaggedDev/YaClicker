@@ -8,7 +8,8 @@ namespace UI
     [CreateAssetMenu(fileName = "Donate Option", menuName = "Uranium Donate", order = 1)]
     public class UraniumDonatePosition : ScriptableObject
     {
-        [SerializeField] private double reward = 0;
+        [SerializeField] private int id;
+        [SerializeField] private double reward;
         [SerializeField] private string descriptionText;
         
         /// <summary>
@@ -17,6 +18,8 @@ namespace UI
         public double Reward => reward;
 
         public string DescriptionText => descriptionText;
+
+        public int ID => id;
     }
     
 }

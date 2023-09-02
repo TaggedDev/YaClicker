@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04981e7ca320441d96895886512bf752, type: 3}
   m_Name: Donate Small
   m_EditorClassIdentifier: 
+  id: 2
   reward: 20
   descriptionText: "\u041C\u0410\u041B\u0415\u041D\u042C\u041A\u0410\u042F \u0417\u0410\u041B\u0415\u0416\u0410
     \u0423\u0420\u0410\u041D\u0410 (+20)"
