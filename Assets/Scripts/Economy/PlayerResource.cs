@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 namespace Economy
 {
+    public enum ResourceType
+    {
+        Coin,
+        Uranium
+    }
     /// <summary>
     /// Model of resource player can earn
     /// </summary>
@@ -29,14 +34,13 @@ namespace Economy
         private double _resourceBank;
 
         public event EventHandler<double> OnResourceChanged = delegate { };
-
-
+        
         public double ResourcePerAutoClick
         {
             get => resourcePerAutoClick;
             set => resourcePerAutoClick = value;
         }
-        
+
         public double ResourcePerClick
         {
             get => resourcePerClick;
@@ -52,10 +56,16 @@ namespace Economy
                     throw new ArithmeticException($"Setting value is below zero");
 
                 _resourceBank = Math.Round(value, 3);
+
                 OnResourceChanged(null, _resourceBank);
                 var stringValue = CoinFarmer.TranslateMoney(_resourceBank);
                 valueText.text = stringValue;
             }
+        }
+        
+        public void HandleDonateButton()
+        {
+            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.UraniumDonate);
         }
 
         private void OnValidate()
@@ -63,11 +73,6 @@ namespace Economy
             backgroundImage.color = backgroundColor;
             iconImage.color = iconColor;
             donateButton.gameObject.SetActive(hasDonateButton);
-        }
-        
-        public void HandleDonateButton()
-        {
-            CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.UraniumDonate);
         }
     }
 }

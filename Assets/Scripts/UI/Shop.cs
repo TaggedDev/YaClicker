@@ -15,19 +15,26 @@ namespace UI
         [SerializeField] private VerticalLayoutGroup layoutParent;
         [SerializeField] private SaveLoader loader;
         [SerializeField] private TextMeshProUGUI buttonText;
-        
+
+        private Cell[] _cells = new Cell[20];
+        public Cell[] Cells => _cells;
+
         public override CanvasLayer CanvasLayerTag => CanvasLayer.Shop;
         
         private void Start()
         {
             var items = Resources.LoadAll<UpgradeMessage>("Upgrades").OrderBy(x => x.UpgradeID);
             Cell previousCell = null;
+            byte i = 0;
             foreach (var message in items)
             {
                 var cell = Instantiate(shopCellPrefab, layoutParent.transform, true);
                 cell.RectTransform.localScale = Vector3.one;
                 cell.AttachUpgradeToCell(message, loader, previousCell);
                 previousCell = cell;
+                
+                _cells[i] = cell;
+                i++;
             }
 
             // Trigger 'not enough money' event on buttons on game loads

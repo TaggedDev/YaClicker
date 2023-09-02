@@ -184,7 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56341a5be2666b4cb93b1143ae5a72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceType: 0
   backgroundImage: {fileID: 7510681600073158519}
   iconImage: {fileID: 8907488412499776924}
   donateButton: {fileID: 6083522110283378118}
@@ -194,6 +193,8 @@ MonoBehaviour:
   hasDonateButton: 0
   resourcePerClick: 0
   resourcePerAutoClick: 0
+  resourceType: 0
+  loader: {fileID: 0}
 --- !u!1 &2622399543820060638
 GameObject:
   m_ObjectHideFlags: 0

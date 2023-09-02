@@ -21,7 +21,7 @@ namespace Economy
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private RectTransform rectTransform;
 
-        private int UpgradeLevel { get; set; }
+        public int UpgradeLevel { get; private set; }
 
         public RectTransform RectTransform => rectTransform;
 
@@ -30,7 +30,7 @@ namespace Economy
         private UpgradeMessage _upgradeMessage;
         private SaveLoader _loader;
         private double _price;
-        
+
 
         public void AttachUpgradeToCell(UpgradeMessage message, SaveLoader loader, Cell previousUpgradeCell)
         {
@@ -40,7 +40,6 @@ namespace Economy
             levelText.text = message.LevelText;
             descriptionText.text = GenerateDescriptionText();
             _previousCell = previousUpgradeCell;
-
             // Bind button
             BindButtonTriggers();
             loader.CoinAmount.OnResourceChanged += UpdateBuyButtonCondition;
@@ -113,6 +112,7 @@ namespace Economy
             
             // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
             _loader.CoinAmount.ResourceBank -= oldPrice;
+            _loader.SaveData();
         }
 
         /// <summary>
