@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using Economy;
 using TMPro;
 using UnityEngine;
+using YG;
 
 namespace UI
 {
@@ -8,10 +10,18 @@ namespace UI
     {
         public override CanvasLayer CanvasLayerTag => CanvasLayer.UraniumDonate;
         [SerializeField] private TextMeshProUGUI buttonText;
-        [SerializeField] private SaveLoader loader;
+        [SerializeField] private PlayerResource uranium;
 
         private Dictionary<int, double> _rewards;
         public Dictionary<int, double> Rewards => _rewards;
+
+        private void OnEnable() => YandexGame.RewardVideoEvent += HandleRewardAdWatch;
+        private void OnDisable() => YandexGame.RewardVideoEvent -= HandleRewardAdWatch;
+
+        private void HandleRewardAdWatch(int rewardId)
+        {
+            uranium.ResourceBank += Rewards[rewardId];
+        }
 
         private void Start()
         {
@@ -35,11 +45,6 @@ namespace UI
         public void UraniumShopOpen()
         {
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.UraniumShop);
-        }
-
-        public void GivePlayerReward(int rewardId)
-        {
-            loader.UraniumAmount.ResourceBank += Rewards[rewardId];
         }
     }
 }

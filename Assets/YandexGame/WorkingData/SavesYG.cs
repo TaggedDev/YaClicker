@@ -12,7 +12,8 @@ namespace YG
         
         // Ваши сохранения
 
-        public double[] PlayerResourceValues { get; } = { 0.0, 0.0 };
-        public int[] PlayerUpgradesLevels { get; } = new int[20];
+        public double PlayerCoins = 0.0;
+        public double PlayerUranium = 0.0;
+        public int[] PlayerUpgradesLevels = new int[20];
     }
 }

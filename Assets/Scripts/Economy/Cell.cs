@@ -25,10 +25,7 @@ namespace Economy
         
         public int UpgradeLevel
         {
-            get
-            {
-                return _upgradeLevel;
-            }
+            get => _upgradeLevel;
             set
             {
                 _upgradeLevel = value;
@@ -126,7 +123,7 @@ namespace Economy
             
             // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
             _loader.CoinAmount.ResourceBank -= oldPrice;
-            _loader.SaveData();
+            _loader.SaveProgress();
         }
 
         /// <summary>
@@ -153,7 +150,6 @@ namespace Economy
             levelText.text = $"LVL {UpgradeLevel}";
             _price = GeneratePrice();
             buttonText.text = CoinFarmer.TranslateMoney(_price);
-
         }
 
         public void HandleButtonPress()

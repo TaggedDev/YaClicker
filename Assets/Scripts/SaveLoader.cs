@@ -14,9 +14,7 @@ public class SaveLoader : MonoBehaviour
     [SerializeField] private PlayerResource uraniumAmount;
     [SerializeField] private Shop shop;
     [SerializeField] private CoinFarmer farmer;
-    [SerializeField] private PlayerProfilePicture playerPicture;
-    [SerializeField] private DonateShop donateShop;
-    
+
     /// <summary>
     /// Coins balance
     /// </summary>
@@ -37,18 +35,28 @@ public class SaveLoader : MonoBehaviour
         farmer.HandleIncomeBoost(multiplier, secondsDuration);
     }
 
-    private void OnEnable()
+    private void OnEnable() =>YandexGame.GetDataEvent += GetLoad;
+    private void OnDisable() => YandexGame.GetDataEvent -= GetLoad;
+    
+    private void GetLoad()
     {
-        YandexGame.GetDataEvent += GetLoad;
-        YandexGame.RewardVideoEvent += HandleRewardAdWatch;
+        coinAmount.ResourceBank = YandexGame.savesData.PlayerCoins;
+        uraniumAmount.ResourceBank = YandexGame.savesData.PlayerUranium;
 
+        for (int i = 0; i < shop.Cells.Length; i++)
+            shop.Cells[i].UpgradeLevel = YandexGame.savesData.PlayerUpgradesLevels[i];
     }
 
-    private void OnDisable()
+    
+    public void SaveProgress()
     {
-        YandexGame.GetDataEvent -= GetLoad;
-        YandexGame.RewardVideoEvent -= HandleRewardAdWatch;
-    } 
+        YandexGame.savesData.PlayerCoins = coinAmount.ResourceBank;
+        YandexGame.savesData.PlayerUranium = uraniumAmount.ResourceBank;
+        for (int i = 0; i < shop.Cells.Length; i++)
+            YandexGame.savesData.PlayerUpgradesLevels[i] = shop.Cells[i].UpgradeLevel;
+        
+        YandexGame.SaveProgress();
+    }
 
     private void Start()
     {
@@ -57,68 +65,10 @@ public class SaveLoader : MonoBehaviour
 
         HandleCanvasLoading();
     }
-
-    private void GetLoad()
-    {
-        LoadData();
-    }
-
+    
     private void HandleCanvasLoading()
     {
         CanvasLayersController.Farmer = farmer;
         CanvasLayersController.Canvases.AddRange(canvases);
-    }
-
-    private void HandleRewardAdWatch(int id)
-    {
-        donateShop.GivePlayerReward(id);
-    }
-    
-    public void SaveData()
-    {
-        YandexGame.savesData.PlayerResourceValues[0] = coinAmount.ResourceBank;
-        YandexGame.savesData.PlayerResourceValues[1] = coinAmount.ResourceBank;
-        for (int i = 0; i < shop.Cells.Length; i++)
-            YandexGame.savesData.PlayerUpgradesLevels[i] = shop.Cells[i].UpgradeLevel;
-        
-        
-        // DEBUG
-        SaveDataEditorly();
-        /*if (YandexGame.auth)
-            SaveDataCloudly();
-        else
-            SaveDataLocally();*/
-    }
-
-    public void AuthSuccess()
-    {
-        playerPicture.SetPlayerPicture();
-        LoadData();
-        //LoadCloudData();
-    }
-    
-    private void LoadData()
-    {
-        coinAmount.ResourceBank = YandexGame.savesData.PlayerResourceValues[0];
-        uraniumAmount.ResourceBank = YandexGame.savesData.PlayerResourceValues[1];
-        for (int i = 0; i < shop.Cells.Length; i++)
-            shop.Cells[i].UpgradeLevel = YandexGame.savesData.PlayerUpgradesLevels[i]; 
-        
-        Debug.Log("Loaded information");
-    }
-
-    private void SaveDataEditorly()
-    {
-        YandexGame.SaveEditor();
-    }
-    
-    private void SaveDataLocally()
-    {
-        YandexGame.SaveLocal();
-    }
-
-    private void SaveDataCloudly()
-    {
-        YandexGame.SaveCloud();
     }
 }

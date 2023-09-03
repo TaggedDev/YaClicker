@@ -36,8 +36,7 @@ namespace Economy
         private float _currentIncomeMultiplier = 1;
         private IEnumerator _currentScalingCoroutine;
         private IEnumerator _currentBoostCountingCoroutine;
-
-
+        
         private void Start()
         {
             var rect = textParent.rect;
@@ -67,8 +66,8 @@ namespace Economy
         /// </summary>
         private void HandlePassiveIncome()
         {
-            saveLoader.SaveData();
             ObtainResources(false, true);
+            saveLoader.SaveProgress();
         }
 
         /// <summary>
