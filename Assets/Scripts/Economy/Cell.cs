@@ -123,7 +123,6 @@ namespace Economy
             
             // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
             _loader.CoinAmount.ResourceBank -= oldPrice;
-            _loader.SaveProgress();
         }
 
         /// <summary>
