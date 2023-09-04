@@ -11,6 +11,7 @@ namespace UI
         [SerializeField] private double price = 0;
         [SerializeField] private float boostTime = 0;
         [SerializeField] private float boostMultiplier = 1;
+        [SerializeField] private string titleText;
         [SerializeField] private string descriptionText;
 
         /// <summary>
@@ -29,6 +30,8 @@ namespace UI
         public double Price => price;
 
         public string DescriptionText => descriptionText;
+
+        public string TitleText => titleText;
     }
     
 }

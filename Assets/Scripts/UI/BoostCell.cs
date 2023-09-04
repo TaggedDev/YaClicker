@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using Economy;
 using TMPro;
 using UnityEngine;
 
@@ -15,7 +17,18 @@ namespace UI
         private void Start()
         {
             buttonText.text = boost.Price.ToString();
-            descriptionText.text = boost.DescriptionText;
+            descriptionText.text = GenerateDescriptionText();
+            
+            string GenerateDescriptionText()
+            {
+                StringBuilder sb = new StringBuilder(boost.TitleText);
+                
+                sb.Append("\n<color=#05f254><size=36>");
+                sb.Append(boost.DescriptionText);
+                sb.Append("</size>");
+
+                return sb.ToString();
+            }
         }
 
         public void HandleBoostPurchase()

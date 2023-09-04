@@ -78,10 +78,10 @@ namespace Economy
             {
                 StringBuilder sb = new StringBuilder(message.DescriptionText);
                 
-                sb.Append("\n<color=#ffa500ff><size=24>");
+                sb.Append("\n<color=#ffa500ff><size=36>");
                 sb.Append($"+{CoinFarmer.TranslateMoney(message.ClickBonus)} за клик\n");
                 sb.Append($"+{CoinFarmer.TranslateMoney(message.AutoClickBonus)} за автоклик\n");
-                sb.Append("</size><b><size=30>");
+                sb.Append("</size>");
 
                 return sb.ToString();
             }
