@@ -20,6 +20,7 @@ namespace Economy
         [SerializeField] private Image backgroundImage;
         [SerializeField] private Image iconImage;
         [SerializeField] private Button donateButton;
+        [SerializeField] private Image donateButtonVisual;
         [SerializeField] private TextMeshProUGUI valueText; 
         
         [Header("Visual settings")]
@@ -72,7 +73,8 @@ namespace Economy
         {
             backgroundImage.color = backgroundColor;
             iconImage.color = iconColor;
-            donateButton.gameObject.SetActive(hasDonateButton);
+            donateButton.interactable = hasDonateButton;
+            donateButtonVisual.gameObject.SetActive(hasDonateButton);
         }
     }
 }
