@@ -36,6 +36,7 @@ namespace Economy
         private float _currentIncomeMultiplier = 1;
         private IEnumerator _currentScalingCoroutine;
         private IEnumerator _currentBoostCountingCoroutine;
+        private float _saveCooldown;
         
         private void Start()
         {
@@ -53,8 +54,15 @@ namespace Economy
 
         private void Update()
         {
+            _saveCooldown -= Time.deltaTime;
+            if (_saveCooldown > 0f)
+            {
+                saveLoader.SaveProgress();
+                _saveCooldown = 5f;
+            }
+            
             _passiveIncomeCooldown -= Time.deltaTime;
-            if (_passiveIncomeCooldown > 0)
+            if (_passiveIncomeCooldown > 0f)
                 return;
 
             _passiveIncomeCooldown = 1;
@@ -64,11 +72,7 @@ namespace Economy
         /// <summary>
         /// Adds passive points to balance
         /// </summary>
-        private void HandlePassiveIncome()
-        {
-            ObtainResources(false, true);
-            saveLoader.SaveProgress();
-        }
+        private void HandlePassiveIncome() => ObtainResources(false, true);
 
         /// <summary>
         /// Adds points for one click
