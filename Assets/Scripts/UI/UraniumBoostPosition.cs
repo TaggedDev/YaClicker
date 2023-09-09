@@ -13,6 +13,9 @@ namespace UI
         [SerializeField] private float boostMultiplier = 1;
         [SerializeField] private string titleText;
         [SerializeField] private string descriptionText;
+        [SerializeField] private string id;
+        
+        public string ID => id;
 
         /// <summary>
         /// Duration (s) of boost 

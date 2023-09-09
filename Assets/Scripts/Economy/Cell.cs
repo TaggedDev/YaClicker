@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Yandex;
 
 namespace Economy
 {
@@ -22,7 +23,8 @@ namespace Economy
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private RectTransform rectTransform;
         private int _upgradeLevel;
-        
+        private Dictionary<string, string> _metricaMessage;
+
         public int UpgradeLevel
         {
             get => _upgradeLevel;
@@ -51,6 +53,12 @@ namespace Economy
             levelText.text = message.LevelText;
             descriptionText.text = GenerateDescriptionText();
             _previousCell = previousUpgradeCell;
+            _metricaMessage = new Dictionary<string, string>()
+            {
+                { "upgradeID", $"{message.UpgradeID}"},
+                { "level", "0"}
+            };
+            
             // Bind button
             BindButtonTriggers();
             loader.CoinAmount.OnResourceChanged += UpdateBuyButtonCondition;
@@ -123,6 +131,8 @@ namespace Economy
             
             // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
             _loader.CoinAmount.ResourceBank -= oldPrice;
+            _metricaMessage["level"] = $"{UpgradeLevel}";
+            Metrica.SendMetricMessage($"UpgradePurchase", _metricaMessage);
         }
 
         /// <summary>

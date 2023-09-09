@@ -1,8 +1,8 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Text;
-using Economy;
 using TMPro;
 using UnityEngine;
+using Yandex;
 
 namespace UI
 {
@@ -13,12 +13,18 @@ namespace UI
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private AdReminderWindow popUp;
-        
+
+        private Dictionary<string, string> _metricaMessage;
+
         private void Start()
         {
             buttonText.text = boost.Price.ToString();
             descriptionText.text = GenerateDescriptionText();
-            
+            _metricaMessage = new Dictionary<string, string>
+            {
+                { "ID", boost.ID }
+            };
+
             string GenerateDescriptionText()
             {
                 StringBuilder sb = new StringBuilder(boost.TitleText);
@@ -43,6 +49,7 @@ namespace UI
             }
             saveLoader.UraniumAmount.ResourceBank -= boost.Price;
             saveLoader.ApplyBoost(boost.BoostMultiplier, boost.BoostTime);
+            Metrica.SendMetricMessage("BoostBought", _metricaMessage);
         }
 
         public void HandleButtonPress()

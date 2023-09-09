@@ -1,6 +1,8 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
+using Yandex;
 using YG;
 
 namespace UI
@@ -10,9 +12,14 @@ namespace UI
         [SerializeField] private UraniumDonatePosition donate;
         [SerializeField] private DonateShop donateShop;
         [SerializeField] private TextMeshProUGUI descriptionText;
-        
+        private Dictionary<string, string> _metricaMessage;
+
         private void Start()
         {
+            _metricaMessage = new Dictionary<string, string>
+            {
+                { "ID", $"{donate.ID}" }
+            };
             descriptionText.text = GenerateDescriptionText();
             
             donateShop.Rewards.Add(donate.ID, donate.Reward);
@@ -30,6 +37,7 @@ namespace UI
         public void HandleAdWatch()
         {
             YandexGame.RewVideoShow(donate.ID);
+            Metrica.SendMetricMessage("AdWatch", _metricaMessage);
         }
     }
 }

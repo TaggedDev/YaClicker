@@ -20,7 +20,7 @@ MonoBehaviour:
   localSaveSync: 1
   saveCloudInterval: 0
   metricaEnable: 1
-  metricaCounterID: 0
+  metricaCounterID: 94887711
   AdWhenLoadingScene: 1
   showFirstAd: 1
   adDisplayCalls: 0
