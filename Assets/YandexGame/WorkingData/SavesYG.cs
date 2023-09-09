@@ -15,5 +15,7 @@ namespace YG
         public double PlayerCoins = 0.0;
         public double PlayerUranium = 0.0;
         public int[] PlayerUpgradesLevels = new int[20];
+        public double PlayerCoinPerClick = 0;
+        public double PlayerCoinPerAutoClick = 0;
     }
 }
