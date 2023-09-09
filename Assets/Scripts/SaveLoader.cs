@@ -48,6 +48,11 @@ public class SaveLoader : MonoBehaviour
 
         coinAmount.ResourcePerClick = YandexGame.savesData.PlayerCoinPerClick;
         coinAmount.ResourcePerAutoClick = YandexGame.savesData.PlayerCoinPerAutoClick;
+
+        if (coinAmount.ResourcePerClick == 0.0)
+            coinAmount.ResourcePerClick = 0.3;
+        if (coinAmount.ResourcePerAutoClick == 0.0)
+            coinAmount.ResourcePerClick = 0.56;
     }
 
     
