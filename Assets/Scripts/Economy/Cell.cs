@@ -45,6 +45,9 @@ namespace Economy
         private double _price;
 
 
+        public double GetCurrentClickBonus() => _upgradeMessage.ClickBonus * UpgradeLevel;
+        public double GetCurrentAutoClickBonus() => _upgradeMessage.AutoClickBonus * UpgradeLevel;
+
         public void AttachUpgradeToCell(UpgradeMessage message, SaveLoader loader, Cell previousUpgradeCell)
         {
             _loader = loader;
@@ -112,7 +115,7 @@ namespace Economy
 
             gameObject.SetActive(isPurchaseAvailable);
         }
-        
+
         /// <summary>
         /// Handles upgrade button click
         /// </summary>

@@ -44,10 +44,12 @@ public class SaveLoader : MonoBehaviour
         uraniumAmount.ResourceBank = YandexGame.savesData.PlayerUranium;
 
         for (int i = 0; i < shop.Cells.Length; i++)
+        {
             shop.Cells[i].UpgradeLevel = YandexGame.savesData.PlayerUpgradesLevels[i];
-
-        coinAmount.ResourcePerClick = YandexGame.savesData.PlayerCoinPerClick;
-        coinAmount.ResourcePerAutoClick = YandexGame.savesData.PlayerCoinPerAutoClick;
+            var upgrade = shop.Cells[i];
+            coinAmount.ResourcePerClick += upgrade.GetCurrentClickBonus();
+            coinAmount.ResourcePerAutoClick += upgrade.GetCurrentAutoClickBonus();
+        }
 
         if (coinAmount.ResourcePerClick == 0.0)
             coinAmount.ResourcePerClick = 0.3;
@@ -62,8 +64,6 @@ public class SaveLoader : MonoBehaviour
         YandexGame.savesData.PlayerUranium = uraniumAmount.ResourceBank;
         for (int i = 0; i < shop.Cells.Length; i++)
             YandexGame.savesData.PlayerUpgradesLevels[i] = shop.Cells[i].UpgradeLevel;
-        YandexGame.savesData.PlayerCoinPerClick = coinAmount.ResourcePerClick;
-        YandexGame.savesData.PlayerCoinPerAutoClick = coinAmount.ResourcePerAutoClick;
         
         YandexGame.SaveProgress();
     }
