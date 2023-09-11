@@ -55,7 +55,7 @@ namespace Economy
         private void Update()
         {
             _saveCooldown -= Time.deltaTime;
-            if (_saveCooldown > 0f)
+            if (_saveCooldown <= 0f)
             {
                 saveLoader.SaveProgress();
                 _saveCooldown = 5f;

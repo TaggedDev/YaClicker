@@ -49,6 +49,7 @@ public class SaveLoader : MonoBehaviour
             var upgrade = shop.Cells[i];
             coinAmount.ResourcePerClick += upgrade.GetCurrentClickBonus();
             coinAmount.ResourcePerAutoClick += upgrade.GetCurrentAutoClickBonus();
+            upgrade.SelectBorder();
         }
 
         if (coinAmount.ResourcePerClick == 0.0)

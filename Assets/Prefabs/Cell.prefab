@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8375407654542016128}
   - component: {fileID: 3608098844037770956}
-  - component: {fileID: 1634034189229148507}
   - component: {fileID: 3386545860472007371}
-  - component: {fileID: 3369050007565456944}
   m_Layer: 5
   m_Name: Image_mask
   m_TagString: Untagged
@@ -50,36 +48,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73224031165791715}
   m_CullTransparentMesh: 1
---- !u!114 &1634034189229148507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73224031165791715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 36911bdc100d8164590b1f16e52f5621, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &3386545860472007371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,19 +68,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &3369050007565456944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73224031165791715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 0
 --- !u!1 &596797880990585545
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +799,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0779a749427e014498ca3bcb45ba9182, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42b0cc8ea2a92074b839ed9c2cd75184, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1164,3 +1119,9 @@ MonoBehaviour:
   buttonTrigger: {fileID: 5239845660094009833}
   buttonText: {fileID: 2257736580427981842}
   rectTransform: {fileID: 3734258794346887784}
+  borders:
+  - {fileID: 21300000, guid: 42b0cc8ea2a92074b839ed9c2cd75184, type: 3}
+  - {fileID: 21300000, guid: aff8622113d34f14481115112c62730b, type: 3}
+  - {fileID: 21300000, guid: 8ef3447a424ec514aaae57ef81b2822e, type: 3}
+  - {fileID: 21300000, guid: da9a09b5f289dce4bb34bac0eaa9ce7a, type: 3}
+  border: {fileID: 1341500303794830740}

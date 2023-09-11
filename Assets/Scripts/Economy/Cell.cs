@@ -22,6 +22,8 @@ namespace Economy
         [SerializeField] private EventTrigger buttonTrigger;
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private RectTransform rectTransform;
+        [SerializeField] private Sprite[] borders;
+        [SerializeField] private Image border;
         private int _upgradeLevel;
         private Dictionary<string, string> _metricaMessage;
 
@@ -135,7 +137,28 @@ namespace Economy
             // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
             _loader.CoinAmount.ResourceBank -= oldPrice;
             _metricaMessage["level"] = $"{UpgradeLevel}";
+            SelectBorder();
+            
             Metrica.SendMetricMessage($"UpgradePurchase", _metricaMessage);
+        }
+
+        public void SelectBorder()
+        {
+            border.sprite = ChooseCorrectBorder();
+            
+            Sprite ChooseCorrectBorder()
+            {
+                if (UpgradeLevel < 20)
+                    return borders[0];
+                
+                if (UpgradeLevel < 50)
+                    return borders[1];
+
+                if (UpgradeLevel < 100)
+                    return borders[2];
+                
+                return borders[3];
+            }
         }
 
         /// <summary>
