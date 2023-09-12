@@ -391,6 +391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 2354124214325619830}
+  uranium: {fileID: 0}
+  cells: []
 --- !u!1 &5160748522109706076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,6 +1051,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4857485565281871279, guid: f59d76622ee051649ab2c4cd98720578, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0a3a6905b6106a3449c4b4a1aac714e1, type: 3}
     - target: {fileID: 5398143939252176822, guid: f59d76622ee051649ab2c4cd98720578, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1255,6 +1261,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4857485565281871279, guid: f59d76622ee051649ab2c4cd98720578, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e934e144b4e3ef141b40b4bf4706bdd3, type: 3}
     - target: {fileID: 5398143939252176822, guid: f59d76622ee051649ab2c4cd98720578, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1461,6 +1471,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4857485565281871279, guid: f59d76622ee051649ab2c4cd98720578, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 712af28c81e74eb4d8ba5590e4a1a032, type: 3}
     - target: {fileID: 5398143939252176822, guid: f59d76622ee051649ab2c4cd98720578, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
