@@ -20,7 +20,7 @@ namespace Economy
         [SerializeField] private uint upgradeID;
         [SerializeField] private Sprite upgradeIcon;
         [SerializeField] private string descriptionText = "Default description text";
-        [SerializeField] private string levelText = "LVL: 0";
+        [SerializeField] private string levelText = "УР. 0";
 
         public double StartPrice => startPrice;
         public double ClickBonus => clickBonus;

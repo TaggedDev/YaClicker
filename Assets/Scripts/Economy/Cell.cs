@@ -182,7 +182,7 @@ namespace Economy
 
         private void UpdateCell()
         {
-            levelText.text = $"LVL {UpgradeLevel}";
+            levelText.text = $"УР. {UpgradeLevel}";
             _price = GeneratePrice();
             buttonText.text = CoinFarmer.TranslateMoney(_price);
         }
