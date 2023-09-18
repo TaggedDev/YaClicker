@@ -24,20 +24,24 @@ namespace Economy
         [SerializeField] private Color boostShortColor;
         [SerializeField] private Image longRays;
         [SerializeField] private Image shortRays;
+        
+        [Header("Objects To Hide")]
+        [SerializeField] private Button shopButton;
+        [SerializeField] private Image backgroundImage;
+        [SerializeField] private Image clickTriggerImage;
         private Color _defaultShortColor;
         private Color _defaultLongColor;
 
         private float _halfWidth, _halfHeight;
         private Animator _animator;
-        private Button _button;
-        private Image _image;
+        private Image _farmerImage;
         private float _passiveIncomeCooldown = 1;
         private float _targetFarmSize;
         private float _currentIncomeMultiplier = 1;
         private IEnumerator _currentScalingCoroutine;
         private IEnumerator _currentBoostCountingCoroutine;
         private float _saveCooldown;
-        
+
         private void Start()
         {
             var rect = textParent.rect;
@@ -47,8 +51,7 @@ namespace Economy
             _defaultLongColor = longRays.color;
             _defaultShortColor = shortRays.color;
 
-            _button = GetComponent<Button>();
-            _image = GetComponent<Image>();
+            _farmerImage = GetComponent<Image>();
             _animator = GetComponent<Animator>();
         }
 
@@ -122,8 +125,12 @@ namespace Economy
 
         public void SetActive(bool isActive)
         {
-            _button.interactable = isActive;
-            _image.enabled = isActive;
+            backgroundImage.gameObject.SetActive(isActive);
+            shopButton.interactable = isActive;
+            _farmerImage.enabled = isActive;
+            shortRays.enabled = isActive;
+            longRays.enabled = isActive;
+            clickTriggerImage.enabled = isActive;
         }
 
         /// <summary>
