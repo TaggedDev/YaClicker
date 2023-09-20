@@ -34,8 +34,8 @@ namespace Economy
             {
                 _upgradeLevel = value;
                 UpdateCell();
+                UpdateBuyButtonCondition(null, SaveLoader.StaticCoin.ResourceBank);
             }
-            
         }
 
         public RectTransform RectTransform => rectTransform;
@@ -50,7 +50,7 @@ namespace Economy
         public double GetCurrentClickBonus() => _upgradeMessage.ClickBonus * UpgradeLevel;
         public double GetCurrentAutoClickBonus() => _upgradeMessage.AutoClickBonus * UpgradeLevel;
 
-        public void AttachUpgradeToCell(UpgradeMessage message, SaveLoader loader, Cell previousUpgradeCell)
+        public void AttachUpgradeToCell(UpgradeMessage message, SaveLoader loader, Cell previousUpgradeCell, double currentBalance)
         {
             _loader = loader;
             _upgradeMessage = message;
@@ -66,8 +66,10 @@ namespace Economy
             
             // Bind button
             BindButtonTriggers();
+            _price = GeneratePrice();
+            UpdateBuyButtonCondition(null, currentBalance);
+            
             loader.CoinAmount.OnResourceChanged += UpdateBuyButtonCondition;
-            UpdateUpgradeButton();
 
             void BindButtonTriggers()
             {
@@ -105,11 +107,12 @@ namespace Economy
             // If not enough money to buy upgrade -> disable button
             var isAffordable = balance >= _price;
             purchaseButton.interactable = isAffordable;
-            
+
             if (_previousCell is null)
                 return;
 
-            var isPreviousUpgradeBought = _previousCell.UpgradeLevel > 1;
+            var isPreviousUpgradeBought = _previousCell.UpgradeLevel > 0;
+            print($"{_price} price // {_previousCell._upgradeLevel} lvl");
             
             // Check affordability 
             // Enable cell if: previous item was already bought or this item is affordable 
@@ -130,7 +133,7 @@ namespace Economy
 
             var oldPrice = _price;
             // Update price
-            UpdateUpgradeButton();
+            UpgradeLevel++;
             _price = GeneratePrice();
             print($"{_upgradeMessage.DescriptionText} upgraded: new price is {_price} for {_upgradeLevel} level");
             
@@ -139,7 +142,7 @@ namespace Economy
             _metricaMessage["level"] = $"{UpgradeLevel}";
             SelectBorder();
             
-            Metrica.SendMetricMessage($"UpgradePurchase", _metricaMessage);
+            Metrica.SendMetricMessage("UpgradePurchase", _metricaMessage);
         }
 
         public void SelectBorder()
@@ -171,13 +174,6 @@ namespace Economy
             if (UpgradeLevel == 0)
                 return _upgradeMessage.StartPrice;
             return Math.Round(_upgradeMessage.StartPrice * Math.Pow(_upgradeMessage.PriceDegreeModificator, UpgradeLevel), 1);
-        }
-
-        private void UpdateUpgradeButton()
-        {
-            // Update text & visual
-            UpgradeLevel++;
-            UpdateCell();
         }
 
         private void UpdateCell()

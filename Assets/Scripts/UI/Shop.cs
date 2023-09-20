@@ -30,7 +30,7 @@ namespace UI
             {
                 var cell = Instantiate(shopCellPrefab, layoutParent.transform, true);
                 cell.RectTransform.localScale = Vector3.one;
-                cell.AttachUpgradeToCell(message, loader, previousCell);
+                cell.AttachUpgradeToCell(message, loader, previousCell, loader.CoinAmount.ResourceBank);
                 previousCell = cell;
                 
                 _cells[i] = cell;

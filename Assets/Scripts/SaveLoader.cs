@@ -19,6 +19,10 @@ public class SaveLoader : MonoBehaviour
     private static PlayerResource _staticUranium;
     private static Shop _staticShop;
 
+    public static PlayerResource StaticCoin => _staticCoin;
+    public static PlayerResource StaticUranium => _staticUranium;
+    public static Shop StaticShop => _staticShop;
+
     /// <summary>
     /// Coins balance
     /// </summary>
