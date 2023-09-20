@@ -129,10 +129,10 @@ namespace Economy
             
 
             var oldPrice = _price;
-
             // Update price
-            _price = GeneratePrice();
             UpdateUpgradeButton();
+            _price = GeneratePrice();
+            print($"{_upgradeMessage.DescriptionText} upgraded: new price is {_price} for {_upgradeLevel} level");
             
             // Subtract points and call <UpdateBuyButtonCondition> from ResourceBank
             _loader.CoinAmount.ResourceBank -= oldPrice;
@@ -170,7 +170,7 @@ namespace Economy
             // Math.Round(Math.Pow(Math.E, _upgradeMessage.StartPrice + _upgradeMessage.PriceDegreeModificator * (_upgradeLevel - 1) / decreasingCoefficient), 3);
             if (UpgradeLevel == 0)
                 return _upgradeMessage.StartPrice;
-            return Math.Round(_upgradeMessage.StartPrice * Math.Pow(_upgradeMessage.PriceDegreeModificator, UpgradeLevel - 1), 3);
+            return Math.Round(_upgradeMessage.StartPrice * Math.Pow(_upgradeMessage.PriceDegreeModificator, UpgradeLevel), 1);
         }
 
         private void UpdateUpgradeButton()
