@@ -15,6 +15,10 @@ public class SaveLoader : MonoBehaviour
     [SerializeField] private Shop shop;
     [SerializeField] private CoinFarmer farmer;
 
+    private static PlayerResource _staticCoin;
+    private static PlayerResource _staticUranium;
+    private static Shop _staticShop;
+
     /// <summary>
     /// Coins balance
     /// </summary>
@@ -58,13 +62,12 @@ public class SaveLoader : MonoBehaviour
             coinAmount.ResourcePerClick = 0.56;
     }
 
-    
-    public void SaveProgress()
+    public static void SaveProgress()
     {
-        YandexGame.savesData.PlayerCoins = coinAmount.ResourceBank;
-        YandexGame.savesData.PlayerUranium = uraniumAmount.ResourceBank;
-        for (int i = 0; i < shop.Cells.Length; i++)
-            YandexGame.savesData.PlayerUpgradesLevels[i] = shop.Cells[i].UpgradeLevel;
+        YandexGame.savesData.PlayerCoins = _staticCoin.ResourceBank;
+        YandexGame.savesData.PlayerUranium = _staticUranium.ResourceBank;
+        for (int i = 0; i < _staticShop.Cells.Length; i++)
+            YandexGame.savesData.PlayerUpgradesLevels[i] = _staticShop.Cells[i].UpgradeLevel;
         
         YandexGame.SaveProgress();
     }
@@ -74,6 +77,10 @@ public class SaveLoader : MonoBehaviour
         if (coinAmount is null || uraniumAmount is null)
             throw new ArgumentException("Resources are not set in SaveLoader");
 
+        _staticCoin = coinAmount;
+        _staticUranium = uraniumAmount;
+        _staticShop = shop;
+        
         HandleCanvasLoading();
     }
     

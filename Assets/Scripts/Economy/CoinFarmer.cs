@@ -60,7 +60,7 @@ namespace Economy
             _saveCooldown -= Time.deltaTime;
             if (_saveCooldown <= 0f)
             {
-                saveLoader.SaveProgress();
+                SaveLoader.SaveProgress();
                 _saveCooldown = 5f;
             }
             

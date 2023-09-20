@@ -23,6 +23,8 @@ namespace UI
         {
             uranium.ResourceBank += Rewards[rewardId];
             ShowDoubleCell(rewardId);
+            
+            SaveLoader.SaveProgress();
         }
 
         private void ShowDoubleCell(int rewardId)

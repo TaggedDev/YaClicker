@@ -120,7 +120,7 @@ namespace Economy
 
         /// <summary>
         /// Handles upgrade button click
-        /// </summary>
+        /// </summary>н
         private void HandleUpgradePurchase()
         {
             // Grant benefits
