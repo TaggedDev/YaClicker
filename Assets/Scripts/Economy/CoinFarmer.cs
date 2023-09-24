@@ -3,7 +3,6 @@ using System.Collections;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Economy
 {
@@ -13,10 +12,7 @@ namespace Economy
     public class CoinFarmer : MonoBehaviour
     {
         [SerializeField] private SaveLoader saveLoader;
-        [SerializeField] private RectTransform textParent;
-        [SerializeField] private ClickText textPrefab;
-        [SerializeField] private Color[] resourceColors;
-        [SerializeField] private Sprite[] resourceSprites;
+        [SerializeField] private ClickTextParent parent;
 
         [Header("Sunrays")] 
         [SerializeField] private Image boostFillBar; 
@@ -32,7 +28,6 @@ namespace Economy
         private Color _defaultShortColor;
         private Color _defaultLongColor;
 
-        private float _halfWidth, _halfHeight;
         private Animator _animator;
         private Image _farmerImage;
         private float _passiveIncomeCooldown = 1;
@@ -44,10 +39,6 @@ namespace Economy
 
         private void Start()
         {
-            var rect = textParent.rect;
-            _halfHeight = rect.height / 2;
-            _halfWidth = rect.width / 2;
-
             _defaultLongColor = longRays.color;
             _defaultShortColor = shortRays.color;
 
@@ -86,22 +77,6 @@ namespace Economy
             HandleClickAnimation();
         }
 
-        private IEnumerator SpawnClickText(string number)
-        {
-            var position = new Vector2(Random.Range(-_halfWidth, _halfWidth), Random.Range(-_halfHeight, _halfHeight));
-            var textInstance = Instantiate(textPrefab, Vector3.zero, Quaternion.identity, textParent.transform);
-            
-            // Set up resource setting for click text
-            textInstance.RectTransform.anchoredPosition = position;
-            textInstance.Text.text = number;
-            textInstance.Text.color = resourceColors[0];
-            textInstance.Image.sprite = resourceSprites[0];
-            
-            // Let the animation process and destroy object
-            yield return new WaitForSeconds(1f);
-            Destroy(textInstance.gameObject);
-        }
-
         private void HandleClickAnimation()
         {
             _animator.Play("FarmSqueeze");
@@ -120,7 +95,7 @@ namespace Economy
             saveLoader.CoinAmount.ResourceBank += income;
             var stringBalance = TranslateMoney(income);
             if (income != 0 && showText)
-                StartCoroutine(SpawnClickText(stringBalance));
+                parent.SpawnText(stringBalance);
         }
 
         public void SetActive(bool isActive)

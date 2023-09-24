@@ -7,7 +7,8 @@ using YG;
 
 public class SaveLoader : MonoBehaviour
 {
-    
+
+    [SerializeField] private Transform textParent;
     [Tooltip("First canvas must be player HUD")] [SerializeField]
     private List<ClickerCanvas> canvases;
     [SerializeField] private PlayerResource coinAmount;

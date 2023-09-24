@@ -112,7 +112,6 @@ namespace Economy
                 return;
 
             var isPreviousUpgradeBought = _previousCell.UpgradeLevel > 0;
-            print($"{_price} price // {_previousCell._upgradeLevel} lvl");
             
             // Check affordability 
             // Enable cell if: previous item was already bought or this item is affordable 
