@@ -22,7 +22,7 @@ namespace UI
 
         public void HandleButtonRelease()
         {
-            buttonText.rectTransform.anchoredPosition += new Vector2(0, 6);
+            buttonText.rectTransform.anchoredPosition = Vector2.zero;
             CloseReminder();
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.UraniumDonate);
         }

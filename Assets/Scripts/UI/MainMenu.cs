@@ -22,7 +22,7 @@ namespace UI
         public void HandleButtonRelease()
         {
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.Shop);
-            buttonText.rectTransform.anchoredPosition += new Vector2(0, 20);
+            buttonText.rectTransform.anchoredPosition = Vector2.zero;//+= new Vector2(0, 20);
         }
     }
 }

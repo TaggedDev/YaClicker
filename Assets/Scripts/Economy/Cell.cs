@@ -192,7 +192,7 @@ namespace Economy
 
         public void HandleButtonRelease()
         {
-            buttonText.rectTransform.anchoredPosition = new Vector2(0, 0);
+            buttonText.rectTransform.anchoredPosition = Vector2.zero;
             if (!purchaseButton.interactable)
                 return;
             

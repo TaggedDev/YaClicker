@@ -51,7 +51,7 @@ namespace UI
 
         public void HandleButtonRelease()
         {
-            buttonText.rectTransform.anchoredPosition += new Vector2(0, 20);
+            buttonText.rectTransform.anchoredPosition = Vector2.zero;
             CanvasLayersController.EnableCanvasOfLayer(CanvasLayer.MainMenu);
         }
 
